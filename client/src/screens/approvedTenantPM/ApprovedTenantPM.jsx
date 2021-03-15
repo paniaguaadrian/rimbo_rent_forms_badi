@@ -1,5 +1,7 @@
 // React components
 import React, { useState, useEffect, useReducer } from "react";
+import { Helmet } from "react-helmet";
+
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { TenantReducer, DefaultTenant } from "./approved_tenant_pm-reducer";
@@ -64,20 +66,9 @@ const ApprovedTenantPM = () => {
         rentalPostalCode,
       } = tenancyData.property;
 
-      // const {
-      //   landlordName,
-      //   landlordEmail,
-      //   landlordPhone,
-      // } = tenancyData.landlord;
-
       const { rentAmount, product, rentDuration } = tenancyData;
 
       const tenancyID = tenancyData.tenancyID;
-
-      console.log(tenancyData);
-      // console.log(tenantsName, randomID);
-      // console.log(agencyContactPerson, agencyEmailPerson);
-      // console.log("this is tenancyID:" + tenancyID);
 
       // Don't send an email if the tenant is already accepted
       if (tenancyData.tenant.isPMAccepted === false) {
@@ -100,9 +91,6 @@ const ApprovedTenantPM = () => {
           rentalAddress,
           rentalCity,
           rentalPostalCode,
-          // landlordName,
-          // landlordEmail,
-          // landlordPhone,
         });
       }
 
@@ -144,19 +132,35 @@ const ApprovedTenantPM = () => {
   );
 
   return (
-    <div className={styles.SuccessPageContainer}>
-      <div className={styles.SuccessPageText}>
-        <h1>The tenant has been accepted</h1>
-        <h2>You have successfully accepted the tenant</h2>
-        <p>
-          The tenant <b>{responseData.tenantsName}</b> is accepted
-        </p>
-        <p>
-          Both you and the tenant will receive an email with the details of the
-          process
-        </p>
+    <>
+      <Helmet>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta
+          name="description"
+          content="La plataforma de alquiler sin depósitos. Descubre una nueva forma de alquilar. Rimbo ahorra al inquilino meses de depósito a la vez que brinda más protección al propietario."
+        />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+        <title>Approved - Rimbo - The new way to rent</title>
+      </Helmet>
+      <div className={styles.SuccessPageContainer}>
+        <div className={styles.SuccessPageText}>
+          <h1>The tenant has been accepted</h1>
+          <h2>You have successfully accepted the tenant</h2>
+          <p>
+            The tenant <b>{responseData.tenantsName}</b> is accepted
+          </p>
+          <p>
+            Both you and the tenant will receive an email with the details of
+            the process
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

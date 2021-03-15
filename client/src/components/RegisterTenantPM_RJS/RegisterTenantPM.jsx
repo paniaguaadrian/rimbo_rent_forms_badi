@@ -1,5 +1,7 @@
 // React Components
 import React, { useState, useEffect, useReducer } from "react";
+import { Helmet } from "react-helmet";
+
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { TenantReducer, DefaultTenant } from "./tenant-reducer";
@@ -76,13 +78,6 @@ const RegisterTenantPM = () => {
     });
   };
 
-  // const changeTextHandler = (event) => {
-  //   setLandlordName(event.target.value);
-  //   setLandlordEmail(event.target.value);
-  //   setLandlordPhone(event.target.value);
-  //   setDate(event.target.value);
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     isSent(false);
@@ -101,14 +96,6 @@ const RegisterTenantPM = () => {
     }
     formData.append("date", date);
     formData.append("tenancyID", tenancyID);
-
-    // const formDataB = new FormData();
-    // formDataB.append("landlordName", landlordName);
-    // formDataB.append("landlordEmail", landlordEmail);
-    // formDataB.append("landlordPhone", landlordPhone);
-    // formDataB.append("tenancyID", tenancyID);
-
-    // console.log(landlordName);
 
     // ! POST to RIMBO_API => DB
     await axios.post(
@@ -170,6 +157,20 @@ const RegisterTenantPM = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta
+          name="description"
+          content="La plataforma de alquiler sin depósitos. Descubre una nueva forma de alquilar. Rimbo ahorra al inquilino meses de depósito a la vez que brinda más protección al propietario."
+        />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+        <title>Landlord Details - Rimbo - The new way to rent</title>
+      </Helmet>
       {!isSuccessfullySubmitted ? (
         <div className={styles.RegisterContainer}>
           <div className={styles.Register}>
