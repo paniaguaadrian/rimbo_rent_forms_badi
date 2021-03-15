@@ -1,10 +1,14 @@
 // React Components
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { TenantReducer, DefaultTenant } from "./tenant-reducer";
 
 // Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
+
+// Constants
+import { UPDATE_NEWTENANT_INFO } from "./tenant-constants";
 
 // Custom Components
 import Input from "../Input";
@@ -15,13 +19,18 @@ import Loader from "react-loader-spinner";
 const RegisterTenantPM = () => {
   const { tenancyID } = useParams();
 
+  const [tenant, setTenant] = useReducer(TenantReducer, DefaultTenant);
   const [isProcessing, setProcessingTo] = useState(false);
   const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false); //eslint-disable-line
   const [err, setErr] = useState(null); //eslint-disable-line
-  // const [selectedFile, setSelectedFile] = useState(null);
+
   const [date, setDate] = useState("");
+  // const [landlordName, setLandlordName] = useState("");
+  // const [landlordEmail, setLandlordEmail] = useState("");
+  // const [landlordPhone, setLandlordPhone] = useState("");
+
   const [files, setFiles] = useState({
     pmAnex: null,
   });
@@ -51,7 +60,7 @@ const RegisterTenantPM = () => {
     getData();
   }, [tenancyID]);
 
-  const changeHandler = (event) => {
+  const changeFilesHandler = (event) => {
     const name = event.target.name;
     setFiles((files) => {
       const newFiles = { ...files };
@@ -60,9 +69,19 @@ const RegisterTenantPM = () => {
     });
   };
 
-  const changeHandlerr = (event) => {
-    setDate(event.target.value);
+  const handleNewTenant = ({ target }) => {
+    setTenant({
+      type: UPDATE_NEWTENANT_INFO,
+      payload: { [target.name]: target.value },
+    });
   };
+
+  // const changeTextHandler = (event) => {
+  //   setLandlordName(event.target.value);
+  //   setLandlordEmail(event.target.value);
+  //   setLandlordPhone(event.target.value);
+  //   setDate(event.target.value);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,10 +102,28 @@ const RegisterTenantPM = () => {
     formData.append("date", date);
     formData.append("tenancyID", tenancyID);
 
+    // const formDataB = new FormData();
+    // formDataB.append("landlordName", landlordName);
+    // formDataB.append("landlordEmail", landlordEmail);
+    // formDataB.append("landlordPhone", landlordPhone);
+    // formDataB.append("tenancyID", tenancyID);
+
+    // console.log(landlordName);
+
     // ! POST to RIMBO_API => DB
     await axios.post(
       `http://localhost:8081/api/tenancies/tenancy/${tenancyID}`,
       formData
+    );
+
+    await axios.post(
+      `http://localhost:8081/api/tenancies/tenancy/badi/${tenancyID}`,
+      {
+        landlordName: tenant.landlordName,
+        landlordEmail: tenant.landlordEmail,
+        landlordPhone: tenant.landlordPhone,
+        tenancyID,
+      }
     );
 
     isSent(true);
@@ -155,19 +192,49 @@ const RegisterTenantPM = () => {
               encType="multipart/form-data"
             >
               <Input
+                type="text"
+                name="landlordName"
+                value={tenant.landlordName}
+                label="Landlord full name"
+                placeholder="Enter name and surname"
+                onChange={(e) => handleNewTenant(e)}
+                required
+                // error={errors.landlordName}
+              />
+              <Input
+                type="email"
+                name="landlordEmail"
+                value={tenant.landlordEmail}
+                label="Landlord email"
+                placeholder="Enter a valid email address"
+                onChange={(e) => handleNewTenant(e)}
+                required
+                // error={errors.landlordEmail}
+              />
+              <Input
+                type="tel"
+                name="landlordPhone"
+                value={tenant.landlordPhone}
+                label="Landlord phone number"
+                placeholder="Enter phone number"
+                onChange={(e) => handleNewTenant(e)}
+                required
+                // error={errors.landlordPhone}
+              />
+              <Input
                 type="date"
                 name="date"
                 value={date}
                 label="Rental start date"
                 placeholder="Write your income"
-                onChange={changeHandlerr}
+                onChange={(e) => setDate(e.target.value)}
                 required
               />
               <InputFile
                 type="file"
                 name="File"
                 label="Rental Agreement - Rimbo Annex"
-                onChange={changeHandler}
+                onChange={changeFilesHandler}
                 required
               />
 

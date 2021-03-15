@@ -23,16 +23,7 @@ export const newTenant = (values) => {
   if (!values.tenantsZipCode) {
     errors.tenantsZipCode = "You must specify a valid zip code";
   }
-  // if (!values.documentImageFront) {
-  //   errors.documentImageFront = "You must upload your document image";
-  // }
-  // if (!values.documentImageBack) {
-  //   errors.documentImageBack = "You must upload your document image";
-  // }
-  // if (!values.documentConfirmAddress) {
-  //   errors.documentConfirmAddress =
-  //     "You must upload a confirm address document";
-  // }
+
   if (!values.isAcceptedPrivacy) {
     errors.isAcceptedPrivacy = "You must accept our Privacy Policy";
   }

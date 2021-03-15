@@ -195,12 +195,22 @@ const RegisterTenantCard = () => {
                     the charge authorization
                   </h2>
                   <div>
-                    <p>
-                      * The card will NOT be blocked. The card will NOT be
-                      charged now. Only in case of legal claims presented by the
-                      landlord the card will be charged, import limited to{" "}
-                      <span>{tenancyData.product} of rent.</span>
-                    </p>
+                    {tenancyData === "Administración" ||
+                    tenancyData === "Administration" ? (
+                      <p>
+                        * The card will NOT be blocked. The card will NOT be
+                        charged now. Only in case of legal claims presented by
+                        the landlord the card will be charged, import limited to{" "}
+                        <span>1 month of rent.</span>
+                      </p>
+                    ) : (
+                      <p>
+                        * The card will NOT be blocked. The card will NOT be
+                        charged now. Only in case of legal claims presented by
+                        the landlord the card will be charged, import limited to{" "}
+                        <span>2 months of rent.</span>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

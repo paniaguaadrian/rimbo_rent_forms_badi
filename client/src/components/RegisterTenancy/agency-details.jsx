@@ -1,10 +1,19 @@
+// React Components
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styles from "../RegisterTenancy/register-user.module.scss";
+
+// Custom Components
 import Input from "../Input";
 import Button from "../Button";
+
+// From Validation
 import { isAgency } from "./validation";
+
+// Constants
 import { UPDATE_TENANCY_INFO } from "./constants";
+
+// Imported Styles
+import styles from "../RegisterTenancy/register-user.module.scss";
 
 const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});
@@ -17,7 +26,7 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
     });
   };
 
-  // Hanlde con next / continue
+  // Handle on next / continue
   const handleContinue = (e) => {
     e.preventDefault();
     const errors = isAgency(tenancy);
@@ -38,6 +47,7 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             placeholder="Enter the name"
             onChange={(e) => handleAgency(e)}
             error={errors.agencyName}
+            disabled
           />
           <Input
             type="text"

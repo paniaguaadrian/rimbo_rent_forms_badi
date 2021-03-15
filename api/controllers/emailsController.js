@@ -23,29 +23,11 @@ const sendRJ1FormEmails = async (req, res) => {
     rentAmount,
     product,
     rentDuration,
-    landlordName,
-    landlordEmail,
-    landlordPhone,
     randomID,
   } = req.body;
 
+  // * START =======> RJ3 Email  @PM/Agency
   const transporterRJ3 = nodemailer.createTransport(
-    sgTransport({
-      auth: {
-        api_key: process.env.SENDGRID_API,
-      },
-    })
-  );
-
-  const transporterRJ4 = nodemailer.createTransport(
-    sgTransport({
-      auth: {
-        api_key: process.env.SENDGRID_API,
-      },
-    })
-  );
-
-  const transporterRJD = nodemailer.createTransport(
     sgTransport({
       auth: {
         api_key: process.env.SENDGRID_API,
@@ -62,29 +44,8 @@ const sendRJ1FormEmails = async (req, res) => {
     viewPath: "views/",
   };
 
-  let optionsRJ4 = {
-    viewEngine: {
-      extname: ".handlebars",
-      layoutsDir: "views/",
-      defaultLayout: "rj4Email",
-    },
-    viewPath: "views/",
-  };
-
-  let optionsRJD = {
-    viewEngine: {
-      extname: ".handlebars",
-      layoutsDir: "views/",
-      defaultLayout: "rjdEmail",
-    },
-    viewPath: "views/",
-  };
-
   transporterRJ3.use("compile", hbs(optionsRJ3));
-  transporterRJ4.use("compile", hbs(optionsRJ4));
-  transporterRJD.use("compile", hbs(optionsRJD));
 
-  // RJ3 Email  @PM/Agency
   const PMEmail = {
     from: "Rimbo info@rimbo.rent",
     to: testEmail, // PM/Agency email
@@ -111,6 +72,7 @@ const sendRJ1FormEmails = async (req, res) => {
       rentalCity,
     },
   };
+
   transporterRJ3.sendMail(PMEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
@@ -118,8 +80,28 @@ const sendRJ1FormEmails = async (req, res) => {
       console.log("Email sent!");
     }
   });
+  // * END =======> RJ3 Email  @PM/Agency
 
-  // RJ4 Email  @Tenant
+  // * START =======> RJ4 Email  @Tenant
+  const transporterRJ4 = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
+  let optionsRJ4 = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "rj4Email",
+    },
+    viewPath: "views/",
+  };
+
+  transporterRJ4.use("compile", hbs(optionsRJ4));
+
   const tenantEmail = {
     from: "Rimbo info@rimbo.rent",
     to: testEmail, // tenant's email
@@ -144,6 +126,7 @@ const sendRJ1FormEmails = async (req, res) => {
       randomID,
     },
   };
+
   transporterRJ4.sendMail(tenantEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
@@ -151,8 +134,28 @@ const sendRJ1FormEmails = async (req, res) => {
       console.log("Email sent!");
     }
   });
+  // * END =======> RJ4 Email  @Tenant
 
-  // RJD Email  @Rimbo
+  // * START =======> RJD Email  @Rimbo
+  const transporterRJD = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
+  let optionsRJD = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "rjdEmail",
+    },
+    viewPath: "views/",
+  };
+
+  transporterRJD.use("compile", hbs(optionsRJD));
+
   const RimboEmail = {
     from: "Rimbo info@rimbo.rent",
     to: testEmail, // Rimbo email
@@ -180,11 +183,9 @@ const sendRJ1FormEmails = async (req, res) => {
       rentalAddress,
       rentalCity,
       rentalPostalCode,
-      landlordName,
-      landlordPhone,
-      landlordEmail,
     },
   };
+
   transporterRJD.sendMail(RimboEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
@@ -192,14 +193,16 @@ const sendRJ1FormEmails = async (req, res) => {
       console.log("Email sent!");
     }
   });
+  // * END =======> RJD Email  @Rimbo
 
   res.status(200).json();
 };
 
-// ! RJ2 Form => RJ9 Email
+// ! RJ2 Form => RJ9 Email (tenant)
 const sendRJ2FormEmails = async (req, res) => {
   const { tenantsName, tenantsEmail } = req.body;
 
+  // * START =======> RJ9 Email  @Tenant
   const transporterRJ9 = nodemailer.createTransport(
     sgTransport({
       auth: {
@@ -219,7 +222,6 @@ const sendRJ2FormEmails = async (req, res) => {
 
   transporterRJ9.use("compile", hbs(optionsRJ9));
 
-  // RJ9 email @Tenant
   const tenantEmail = {
     from: "Rimbo info@rimbo.rent",
     to: tenantsEmail, // Tenant email
@@ -245,11 +247,12 @@ const sendRJ2FormEmails = async (req, res) => {
       console.log("Email sent!");
     }
   });
+  // * END =======> RJ9 Email  @Tenant
 
   res.status(200).json();
 };
 
-// ! RJ2 Form => RJXX3 Email with tenant's files attached
+// ! RJ2 Form => RJXX3 Email with tenant's files attached (Rimbo)
 const sendRJ3FilesEmail = async (req, res) => {
   const {
     agencyName,
@@ -274,11 +277,9 @@ const sendRJ3FilesEmail = async (req, res) => {
     rentalAddress,
     rentalCity,
     rentalPostalCode,
-    landlordName,
-    landlordPhone,
-    landlordEmail,
   } = req.body;
 
+  // * START =======> RJXX3 Email  @Rimbo
   const transporterRJXX3Files = nodemailer.createTransport(
     sgTransport({
       auth: {
@@ -298,7 +299,6 @@ const sendRJ3FilesEmail = async (req, res) => {
 
   transporterRJXX3Files.use("compile", hbs(optionsRJXX3));
 
-  // RJXX3 email @Rimbo
   const RimboEmail = {
     from: "Rimbo info@rimbo.rent",
     to: testEmail, // Rimbo email
@@ -335,9 +335,6 @@ const sendRJ3FilesEmail = async (req, res) => {
       rentalAddress,
       rentalCity,
       rentalPostalCode,
-      landlordName,
-      landlordPhone,
-      landlordEmail,
     },
   };
 
@@ -348,6 +345,7 @@ const sendRJ3FilesEmail = async (req, res) => {
       console.log("Email sent!");
     }
   });
+  // * END =======> RJXX3 Email  @Tenant
 
   res.status(200).json();
 };
@@ -370,7 +368,6 @@ const sendRJ11Emails = async (req, res) => {
     })
   );
 
-  // ! Integration with hbs
   let optionsRJ11 = {
     viewEngine: {
       extname: ".handlebars",
@@ -434,9 +431,6 @@ const sendPMEmails = async (req, res) => {
     rentalAddress,
     rentalCity,
     rentalPostalCode,
-    landlordName,
-    landlordEmail,
-    landlordPhone,
   } = req.body;
 
   const transporterRJXX4 = nodemailer.createTransport(
@@ -509,9 +503,6 @@ const sendPMEmails = async (req, res) => {
       rentalAddress,
       rentalCity,
       rentalPostalCode,
-      landlordName,
-      landlordEmail,
-      landlordPhone,
     },
   };
 

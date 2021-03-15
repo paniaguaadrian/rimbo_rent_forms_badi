@@ -62,25 +62,6 @@ export const isProperty = (values) => {
   if (!values.rentalAddress) {
     errors.rentalAddress = "Rental Address is required.";
   }
-  return errors;
-};
-
-export const isLandlord = (values) => {
-  let errors = {};
-  if (!values.landlordName) {
-    errors.landlordName = "Landlord name is required.";
-  }
-  if (!values.landlordEmail) {
-    errors.landlordEmail = "Landlord email address is required";
-  } else if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.landlordEmail = "Email address is invalid";
-  }
-  if (!values.landlordPhone) {
-    errors.landlordPhone = "Phone number is required";
-  }
-  if (values.landlordPhone && values.landlordPhone.length < 9) {
-    errors.landlordPhone = "Enter valid phone number";
-  }
   if (!values.isAgentAccepted) {
     errors.isAgentAccepted = "You must accept our Terms and Conditions";
   }

@@ -7,9 +7,6 @@ export const DefaultTenant = {
   documentNumber: "",
   tenantsAddress: "",
   tenantsZipCode: "",
-  // documentImageFront: "",
-  // documentImageBack: "",
-  // documentConfirmAddress: "",
   isAcceptedPrivacy: true,
 };
 

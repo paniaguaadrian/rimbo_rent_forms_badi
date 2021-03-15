@@ -1,10 +1,19 @@
+// React Components
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { isTenant } from "./validation";
-import styles from "../RegisterTenancy/register-user.module.scss";
+
+// Custom Components
 import Input from "../Input";
 import Button from "../Button";
+
+// From Validation
+import { isTenant } from "./validation";
+
+// Constants
 import { UPDATE_TENANT_INFO } from "./constants";
+
+// Imported Styles
+import styles from "../RegisterTenancy/register-user.module.scss";
 
 const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});

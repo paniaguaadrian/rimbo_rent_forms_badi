@@ -103,7 +103,6 @@ const RegisterTenant = () => {
     setErrors(errors);
     if (Object.keys(errors).length > 0) return;
     setProcessingTo(true);
-    // setIsSuccessfullySubmitted(true);
 
     // ! Post to Rimbo API (files/images)
     await axios.post(
@@ -140,7 +139,6 @@ const RegisterTenant = () => {
       monthlyNetIncome: tenant.monthlyNetIncome,
       jobType: tenant.jobType,
       documentNumber: tenant.documentNumber,
-      // ! Falta documento de DNI
       tenantsAddress: tenant.tenantsAddress,
       tenantsZipCode: tenant.tenantsZipCode,
       // Proprety
@@ -150,10 +148,6 @@ const RegisterTenant = () => {
       rentalAddress: responseData.property.rentalAddress,
       rentalCity: responseData.property.rentalCity,
       rentalPostalCode: responseData.property.rentalPostalCode,
-      // Landlord
-      landlordName: responseData.landlord.landlordName,
-      landlordPhone: responseData.landlord.landlordPhone,
-      landlordEmail: responseData.landlord.landlordEmail,
     });
     isSent(true);
     setIsSuccessfullySubmitted(true);
@@ -211,10 +205,6 @@ const RegisterTenant = () => {
           rentalAddress: responseDataAfter.property.rentalAddress,
           rentalCity: responseDataAfter.property.rentalCity,
           rentalPostalCode: responseDataAfter.property.rentalPostalCode,
-          // Landlord
-          landlordName: responseDataAfter.landlord.landlordName,
-          landlordPhone: responseDataAfter.landlord.landlordPhone,
-          landlordEmail: responseDataAfter.landlord.landlordEmail,
         });
       }
     };

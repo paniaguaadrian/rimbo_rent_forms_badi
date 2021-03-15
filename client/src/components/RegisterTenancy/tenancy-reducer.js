@@ -2,11 +2,10 @@ import {
   UPDATE_TENANCY_INFO,
   UPDATE_TENANT_INFO,
   UPDATE_PROPERTY_INFO,
-  UPDATE_LANDLORD_INFO,
 } from "./constants";
 
 export const DefaultTenancy = {
-  agencyName: "",
+  agencyName: "Badi",
   agencyEmailPerson: "",
   agencyContactPerson: "",
   agencyPhonePerson: "",
@@ -24,11 +23,6 @@ export const DefaultTenancy = {
     rentAmount: "",
     rentDuration: "",
     product: "",
-  },
-  landlordDetails: {
-    landlordName: "",
-    landlordEmail: "",
-    landlordPhone: "",
     isAgentAccepted: true,
   },
 };
@@ -59,14 +53,14 @@ export const TenancyReducer = (tenancy, { type, payload }) => {
         },
       };
 
-    case UPDATE_LANDLORD_INFO:
-      return {
-        ...tenancy,
-        landlordDetails: {
-          ...tenancy.landlordDetails,
-          ...payload,
-        },
-      };
+    // case UPDATE_LANDLORD_INFO:
+    //   return {
+    //     ...tenancy,
+    //     landlordDetails: {
+    //       ...tenancy.landlordDetails,
+    //       ...payload,
+    //     },
+    //   };
 
     default:
       return tenancy;

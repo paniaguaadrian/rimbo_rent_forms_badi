@@ -1,5 +1,8 @@
+// React Components
 import React from "react";
 import PropTypes from "prop-types";
+
+// Imported Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
 
 const Completed = ({ tenancy }) => {

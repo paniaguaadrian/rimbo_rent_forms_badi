@@ -1,13 +1,29 @@
+// React Components
 import React, { useState } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
-import { isProperty } from "./validation";
+
+// Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
-import Input from "../Input";
-import Button from "../Button";
+
+// Validation
+import { isProperty } from "./validation";
+
+// Constants
 import { UPDATE_PROPERTY_INFO } from "./constants";
+
+// Custom Components
+import Input from "../Input";
+import InputCheck from "../InputCheck";
+import Button from "../Button";
+import Loader from "react-loader-spinner";
+
+// nanoid
+import { nanoid } from "nanoid";
 
 const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});
+  const [isProcessing, setProcessingTo] = useState(false);
 
   // Handle on change
   const handleAgency = ({ target }) => {
@@ -18,19 +34,67 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
   };
 
   // Hanlde con next / continue
-  const handleContinue = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const errors = isProperty(tenancy.propertyDetails);
     setErrors(errors);
     if (Object.keys(errors).length > 0) return;
+
+    setProcessingTo(true);
+
+    const randomID = nanoid();
+
+    await axios.post("http://localhost:8081/api/tenancies/badi", {
+      // tenant
+      tenantsName: tenancy.tenantDetails.tenantName,
+      tenantsEmail: tenancy.tenantDetails.tenantEmail,
+      tenantsPhone: tenancy.tenantDetails.tenantPhone,
+      randomID: randomID,
+      // agency, agent
+      agencyName: tenancy.agencyName,
+      agencyEmailPerson: tenancy.agencyEmailPerson,
+      agencyContactPerson: tenancy.agencyContactPerson,
+      agencyPhonePerson: tenancy.agencyPhonePerson,
+      isAgentAccepted: tenancy.propertyDetails.isAgentAccepted,
+      // property
+      rentalCity: tenancy.propertyDetails.rentalCity,
+      rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+      rentalAddress: tenancy.propertyDetails.rentalAddress,
+      // tenancy
+      product: tenancy.propertyDetails.product,
+      rentDuration: tenancy.propertyDetails.rentDuration,
+      rentAmount: tenancy.propertyDetails.rentAmount,
+      tenancyID: randomID,
+      // property manager
+      PMName: tenancy.agencyName,
+    });
+
+    await axios.post("http://localhost:8080/submit-email/rj1", {
+      tenantsName: tenancy.tenantDetails.tenantName,
+      tenantsEmail: tenancy.tenantDetails.tenantEmail,
+      tenantsPhone: tenancy.tenantDetails.tenantPhone,
+      agencyName: tenancy.agencyName,
+      agencyContactPerson: tenancy.agencyContactPerson,
+      agencyPhonePerson: tenancy.agencyPhonePerson,
+      agencyEmailPerson: tenancy.agencyEmailPerson,
+      rentDuration: tenancy.propertyDetails.rentDuration,
+      product: tenancy.propertyDetails.product,
+      rentAmount: tenancy.propertyDetails.rentAmount,
+      rentalAddress: tenancy.propertyDetails.rentalAddress,
+      rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+      rentalCity: tenancy.propertyDetails.rentalCity,
+      randomID,
+    });
+
     setStep(step + 1);
   };
 
   // Values for Select input
-  const services = ["1 month", "2 months", "3 months"];
+  const services = ["Administración", "Gestión", "Protección"];
 
   return (
-    <form onSubmit={handleContinue}>
+    <form onSubmit={handleSubmit}>
       <div className={styles.FormIntern}>
         <div className={styles.FormLeft}>
           <div className={styles.selectContainer}>
@@ -99,6 +163,41 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleAgency(e)}
             error={errors.rentalPostalCode}
           />
+
+          <InputCheck
+            type="checkbox"
+            required
+            name="isAgentAccepted"
+            id="terms"
+            value={tenancy.propertyDetails.isAgentAccepted}
+            placeholder="Accept our terms and conditions"
+            onChange={(e) => handleAgency(e)}
+            error={errors.isAgentAccepted}
+          />
+          <p>
+            By submitting this form, you understand and accept that we use your
+            information in accordance with our{" "}
+            <a
+              href="https://rimbo.rent/en/privacy-policy/"
+              target="_blank"
+              rel="noreferrer"
+              className="link-tag"
+            >
+              {" "}
+              privacy policy
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://rimbo.rent/en/cookies-policy/"
+              target="_blank"
+              rel="noreferrer"
+              className="link-tag"
+            >
+              {" "}
+              cookies policy
+            </a>
+            .
+          </p>
         </div>
       </div>
 
@@ -106,7 +205,19 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
         <Button onClick={() => setStep(step - 1)} type="button">
           Previous Step
         </Button>
-        <Button type="submit">Next Step</Button>
+        {isProcessing ? (
+          <Loader
+            type="Puff"
+            color="#01d2cc"
+            height={50}
+            width={50}
+            timeout={3000} //3 secs
+          />
+        ) : (
+          <Button disabled={isProcessing} type="submit">
+            Submit
+          </Button>
+        )}
       </div>
     </form>
   );

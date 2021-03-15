@@ -64,11 +64,11 @@ const ApprovedTenantPM = () => {
         rentalPostalCode,
       } = tenancyData.property;
 
-      const {
-        landlordName,
-        landlordEmail,
-        landlordPhone,
-      } = tenancyData.landlord;
+      // const {
+      //   landlordName,
+      //   landlordEmail,
+      //   landlordPhone,
+      // } = tenancyData.landlord;
 
       const { rentAmount, product, rentDuration } = tenancyData;
 
@@ -100,9 +100,9 @@ const ApprovedTenantPM = () => {
           rentalAddress,
           rentalCity,
           rentalPostalCode,
-          landlordName,
-          landlordEmail,
-          landlordPhone,
+          // landlordName,
+          // landlordEmail,
+          // landlordPhone,
         });
       }
 
