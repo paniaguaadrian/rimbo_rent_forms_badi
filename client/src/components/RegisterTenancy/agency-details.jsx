@@ -15,7 +15,10 @@ import { UPDATE_TENANCY_INFO } from "./constants";
 // Imported Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
 
-const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
+// Multi language
+import { withNamespaces } from "react-i18next";
+
+const AgencyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [errors, setErrors] = useState({});
 
   // Handle on change
@@ -43,8 +46,7 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="agencyName"
             value={tenancy.agencyName}
-            label="Agency Name"
-            placeholder="Enter the name"
+            label={t("RJ1.stepZero.agencyName")}
             onChange={(e) => handleAgency(e)}
             error={errors.agencyName}
             disabled
@@ -53,8 +55,8 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="agencyContactPerson"
             value={tenancy.agencyContactPerson}
-            label="Contact Person"
-            placeholder="Enter full name"
+            label={t("RJ1.stepZero.contactPerson")}
+            placeholder={t("RJ1.stepZero.contactPersonPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.agencyContactPerson}
           />
@@ -64,8 +66,8 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="email"
             name="agencyEmailPerson"
             value={tenancy.agencyEmailPerson}
-            label="Email"
-            placeholder="Enter a valid email address"
+            label={t("RJ1.stepZero.emailPerson")}
+            placeholder={t("RJ1.stepZero.emailPersonPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.agencyEmailPerson}
           />
@@ -73,8 +75,8 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="tel"
             name="agencyPhonePerson"
             value={tenancy.agencyPhonePerson}
-            label="Phone number"
-            placeholder="Enter phone number"
+            label={t("RJ1.stepZero.phonePerson")}
+            placeholder={t("RJ1.stepZero.phonePersonPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.agencyPhonePerson}
           />
@@ -95,4 +97,4 @@ AgencyDetails.propTypes = {
   setTenancy: PropTypes.func,
 };
 
-export default AgencyDetails;
+export default withNamespaces()(AgencyDetails);

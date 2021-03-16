@@ -163,42 +163,43 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleAgency(e)}
             error={errors.rentalPostalCode}
           />
-
-          <InputCheck
-            type="checkbox"
-            required
-            name="isAgentAccepted"
-            id="terms"
-            value={tenancy.propertyDetails.isAgentAccepted}
-            placeholder="Accept our terms and conditions"
-            onChange={(e) => handleAgency(e)}
-            error={errors.isAgentAccepted}
-          />
-          <p>
-            By submitting this form, you understand and accept that we use your
-            information in accordance with our{" "}
-            <a
-              href="https://rimbo.rent/en/privacy-policy/"
-              target="_blank"
-              rel="noreferrer"
-              className="link-tag"
-            >
-              {" "}
-              privacy policy
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://rimbo.rent/en/cookies-policy/"
-              target="_blank"
-              rel="noreferrer"
-              className="link-tag"
-            >
-              {" "}
-              cookies policy
-            </a>
-            .
-          </p>
         </div>
+      </div>
+      <div className={styles.TermsContainer}>
+        <InputCheck
+          type="checkbox"
+          required
+          name="isAgentAccepted"
+          id="terms"
+          value={tenancy.propertyDetails.isAgentAccepted}
+          placeholder="Accept our terms and conditions"
+          onChange={(e) => handleAgency(e)}
+          error={errors.isAgentAccepted}
+        />
+        <p>
+          By submitting this form, you understand and accept that we use your
+          information in accordance with our{" "}
+          <a
+            href="https://rimbo.rent/en/privacy-policy/"
+            target="_blank"
+            rel="noreferrer"
+            className="link-tag"
+          >
+            {" "}
+            privacy policy
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://rimbo.rent/en/cookies-policy/"
+            target="_blank"
+            rel="noreferrer"
+            className="link-tag"
+          >
+            {" "}
+            cookies policy
+          </a>
+          .
+        </p>
       </div>
 
       <div className={styles.ButtonContainer}>

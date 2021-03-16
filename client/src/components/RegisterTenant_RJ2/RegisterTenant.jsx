@@ -263,7 +263,7 @@ const RegisterTenant = () => {
           <div className={styles.FormContent}>
             <form
               onSubmit={handleSubmit}
-              className="styles.RegisterForm"
+              className={styles.RegisterForm}
               encType="multipart/form-data"
             >
               <div className={styles.FormIntern}>

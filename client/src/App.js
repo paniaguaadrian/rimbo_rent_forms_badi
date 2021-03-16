@@ -2,6 +2,8 @@
 import { Route } from "react-router-dom";
 
 // Custom Components
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 import RegisterTenancy from "./components/RegisterTenancy";
 import RegisterTenant from "./components/RegisterTenant_RJ2/RegisterTenant";
 import StripeHandler from "./components/RegisterTenantCard_RJ3/StripeHandlerComponent";
@@ -12,12 +14,15 @@ import ApprovedTenantCardRimbo from "./screens/approvedTenantCardRimbo/ApprovedT
 import RegisterTenantPM from "./components/RegisterTenantPM_RJS/RegisterTenantPM";
 import ApprovedTenancyRimbo from "./screens/approvedTenancyRimbo/ApprovedTenancyRimbo";
 
+import { withNamespaces } from "react-i18next";
+
 // Normalize & Generic styles
 import "./styles/generic.scss";
 
 const App = () => {
   return (
     <>
+      <NavBar />
       <Route exact path="/register/rj1" component={RegisterTenancy} />
       <Route exact path="/register/rj2/:tenancyID" component={RegisterTenant} />
       <Route
@@ -51,8 +56,9 @@ const App = () => {
         path="/register/rjs/:tenancyID/service-start"
         component={ApprovedTenancyRimbo}
       />
+      <Footer />
     </>
   );
 };
 
-export default App;
+export default withNamespaces()(App);

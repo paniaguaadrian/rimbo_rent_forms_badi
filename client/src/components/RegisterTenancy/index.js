@@ -9,33 +9,37 @@ import styles from "./register-user.module.scss";
 
 // Custom Components
 import FormSteps from "./form-steps";
+import { withNamespaces } from "react-i18next";
 
-const RegisterTenancy = () => {
+const RegisterTenancy = ({ t }) => {
   let [step, setStep] = useState(0);
 
   const [tenancy, setTenancy] = useReducer(TenancyReducer, DefaultTenancy);
   let steps = FormSteps(step, setStep, tenancy, setTenancy);
 
   return (
-    <div className={styles.RegisterContainer}>
-      {step === 0 || step === 1 || step === 2 ? (
-        <div className={styles.Register}>
-          <h1>List your tenant for screening</h1>
-          <div className={styles.ExtraInfoContainer}>
-            <p>Fill out the fields.</p>
-            <p>Rimbo screens in 24 hours.</p>
-            <p>Receive a response via email.</p>
+    <>
+      <div className={styles.RegisterContainer}>
+        {step === 0 || step === 1 || step === 2 ? (
+          <div className={styles.Register}>
+            {/* <h1>List your tenant for screening</h1> */}
+            <h1>{t("RJ1.header.title")}</h1>
+            <div className={styles.ExtraInfoContainer}>
+              <p>{t("RJ1.header.subtitleOne")}</p>
+              <p>{t("RJ1.header.subtitleTwo")}</p>
+              <p>{t("RJ1.header.subtitleThree")}</p>
+            </div>
+            <h4>
+              Step {step + 1} / {steps.length} -{" "}
+              <span>{steps[`${step}`].title}</span>
+            </h4>
           </div>
-          <h4>
-            Step {step + 1} / {steps.length} -{" "}
-            <span>{steps[`${step}`].title}</span>
-          </h4>
-        </div>
-      ) : null}
+        ) : null}
 
-      <div className={styles.FormContent}>{steps[`${step}`].content}</div>
-    </div>
+        <div className={styles.FormContent}>{steps[`${step}`].content}</div>
+      </div>
+    </>
   );
 };
 
-export default RegisterTenancy;
+export default withNamespaces()(RegisterTenancy);

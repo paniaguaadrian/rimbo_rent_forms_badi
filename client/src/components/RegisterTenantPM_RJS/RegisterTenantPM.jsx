@@ -192,52 +192,58 @@ const RegisterTenantPM = () => {
               className="styles.RegisterForm"
               encType="multipart/form-data"
             >
-              <Input
-                type="text"
-                name="landlordName"
-                value={tenant.landlordName}
-                label="Landlord full name"
-                placeholder="Enter name and surname"
-                onChange={(e) => handleNewTenant(e)}
-                required
-                // error={errors.landlordName}
-              />
-              <Input
-                type="email"
-                name="landlordEmail"
-                value={tenant.landlordEmail}
-                label="Landlord email"
-                placeholder="Enter a valid email address"
-                onChange={(e) => handleNewTenant(e)}
-                required
-                // error={errors.landlordEmail}
-              />
-              <Input
-                type="tel"
-                name="landlordPhone"
-                value={tenant.landlordPhone}
-                label="Landlord phone number"
-                placeholder="Enter phone number"
-                onChange={(e) => handleNewTenant(e)}
-                required
-                // error={errors.landlordPhone}
-              />
-              <Input
-                type="date"
-                name="date"
-                value={date}
-                label="Rental start date"
-                placeholder="Write your income"
-                onChange={(e) => setDate(e.target.value)}
-                required
-              />
-              <InputFile
-                type="file"
-                name="File"
-                label="Rental Agreement - Rimbo Annex"
-                onChange={changeFilesHandler}
-                required
-              />
+              <div className={styles.FormIntern}>
+                <div className={styles.FormLeft}>
+                  <Input
+                    type="text"
+                    name="landlordName"
+                    value={tenant.landlordName}
+                    label="Landlord full name"
+                    placeholder="Enter name and surname"
+                    onChange={(e) => handleNewTenant(e)}
+                    required
+                    // error={errors.landlordName}
+                  />
+                  <Input
+                    type="email"
+                    name="landlordEmail"
+                    value={tenant.landlordEmail}
+                    label="Landlord email"
+                    placeholder="Enter a valid email address"
+                    onChange={(e) => handleNewTenant(e)}
+                    required
+                    // error={errors.landlordEmail}
+                  />
+                  <Input
+                    type="tel"
+                    name="landlordPhone"
+                    value={tenant.landlordPhone}
+                    label="Landlord phone number"
+                    placeholder="Enter phone number"
+                    onChange={(e) => handleNewTenant(e)}
+                    required
+                    // error={errors.landlordPhone}
+                  />
+                </div>
+                <div className={styles.FormRight}>
+                  <Input
+                    type="date"
+                    name="date"
+                    value={date}
+                    label="Rental start date"
+                    placeholder="Write your income"
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                  />
+                  <InputFile
+                    type="file"
+                    name="File"
+                    label="Rental Agreement - Rimbo Annex"
+                    onChange={changeFilesHandler}
+                    required
+                  />
+                </div>
+              </div>
 
               <div className={styles.ButtonContainer}>
                 {isProcessing ? (

@@ -15,7 +15,10 @@ import { UPDATE_TENANT_INFO } from "./constants";
 // Imported Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
 
-const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
+// Multi language
+import { withNamespaces } from "react-i18next";
+
+const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [errors, setErrors] = useState({});
 
   // Handle on change
@@ -43,7 +46,7 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="tenantName"
             value={tenancy.tenantDetails.tenantName}
-            label="Tenant's full name"
+            label={t("RJ1.stepOne.tenantName")}
             placeholder="Enter name and surname"
             onChange={(e) => handleTenant(e)}
             error={errors.tenantName}
@@ -52,7 +55,7 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="email"
             name="tenantEmail"
             value={tenancy.tenantDetails.tenantEmail}
-            label="Tenant's email"
+            label={t("RJ1.stepOne.tenantEmail")}
             placeholder="Enter a valid email address"
             onChange={(e) => handleTenant(e)}
             error={errors.tenantEmail}
@@ -63,7 +66,7 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="tenantPhone"
             value={tenancy.tenantDetails.tenantPhone}
-            label="Tenant's phone number"
+            label={t("RJ1.stepOne.tenantsPhone")}
             placeholder="Enter phone number"
             onChange={(e) => handleTenant(e)}
             error={errors.tenantPhone}
@@ -88,4 +91,4 @@ TenantDetails.propTypes = {
   setTenancy: PropTypes.func,
 };
 
-export default TenantDetails;
+export default withNamespaces()(TenantDetails);

@@ -1,0 +1,24 @@
+{
+  "RJ1": {
+    "header": {
+      "title": "Registra a tu inquilino para su evaluación",
+      "subtitleOne": "Completa los campos.",
+      "subtitleTwo": "Rimbo lo evalúa en los próximos 24 horas.",
+      "subtitleThree": "Recibirás una respuesta por correo electrónico."
+    },
+    "stepZero": {
+      "agencyName": "Nombre de la inmobiliaria",
+      "contactPerson": "Persona de contacto",
+      "contactPersonPL": "Escribe tu nombre completo",
+      "emailPerson": "Correo electrónico",
+      "emailPersonPL": "Escribe el correo electrónico",
+      "phonePerson": "Número de teléfono",
+      "phonePersonPL": "Escribe el número de teléfono"
+    },
+    "stepOne": {
+      "tenantName": "Nombre completo del inquilino",
+      "tenantEmail": "Correo electrónico del inquilino",
+      "tenantsPhone": "Número de teléfono del inquilino"
+    }
+  }
+}

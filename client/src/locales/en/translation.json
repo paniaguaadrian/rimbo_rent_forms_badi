@@ -1,0 +1,24 @@
+{
+  "RJ1": {
+    "header": {
+      "title": "List your tenant",
+      "subtitleOne": "Fill out the fields.",
+      "subtitleTwo": "Rimbo screens in 24 hours.",
+      "subtitleThree": "Receive a response via email."
+    },
+    "stepZero": {
+      "agencyName": "Agency Name",
+      "contactPerson": "Contact Person",
+      "contactPersonPL": "Enter full name",
+      "emailPerson": "Email",
+      "emailPersonPL": "Enter a valid email address",
+      "phonePerson": "Phone Number",
+      "phonePersonPL": "Enter phone number"
+    },
+    "stepOne": {
+      "tenantName": "Tenant's Full Name",
+      "tenantEmail": "Tenant's email",
+      "tenantsPhone": "Tenant's phone number"
+    }
+  }
+}

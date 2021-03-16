@@ -9,6 +9,7 @@ import "./index.scss";
 
 // Custom components
 import App from "./App";
+import "./i18n";
 
 ReactDOM.render(
   <Router>
