@@ -36,7 +36,12 @@ const Footer = () => {
       </div>
 
       <div>
-        <a href="https://rimbo.rent/" target="_blank" rel="noreferrer">
+        <a
+          className={styles.LinkToPage}
+          href="https://rimbo.rent/"
+          target="_blank"
+          rel="noreferrer"
+        >
           Discover the <span>Rimbo</span> Revolution
         </a>
       </div>

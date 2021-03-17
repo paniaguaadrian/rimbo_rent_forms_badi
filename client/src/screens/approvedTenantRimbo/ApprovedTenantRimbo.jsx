@@ -7,8 +7,15 @@ import { useParams } from "react-router-dom";
 import { TenantReducer, DefaultTenant } from "./approved_tenant_rimbo-reducer";
 
 // Styles
-
 import styles from "./approved-user.module.scss";
+
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCY,
+  REACT_APP_BASE_URL_EMAIL,
+  REACT_APP_API_RIMBO_TENANT,
+} = process.env;
 
 const ApprovedTenantRimbo = () => {
   let { tenancyID } = useParams();
@@ -20,12 +27,14 @@ const ApprovedTenantRimbo = () => {
   useEffect(() => {
     // Simplify fetchUserData.
     const fetchUserData = () =>
-      axios.get(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`);
+      axios.get(
+        `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
+      );
 
     // Add body to post decision. So we can send data.
     const postDecision = (body) =>
       axios.post(
-        `http://localhost:8081/api/tenants/tenant/${randomID}/approved`,
+        `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/approved`,
         body
       );
 
@@ -49,7 +58,7 @@ const ApprovedTenantRimbo = () => {
       const tenancyID = tenancyData.tenancyID;
 
       if (tenancyData.tenant.isRimboAccepted === false) {
-        axios.post("http://localhost:8080/submit-email/rj11", {
+        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj11`, {
           tenantsName,
           agencyContactPerson,
           agencyEmailPerson,
@@ -71,7 +80,7 @@ const ApprovedTenantRimbo = () => {
   useEffect(
     () => {
       const getData = () => {
-        fetch(`http://localhost:8081/api/tenants/tenant/${randomID}`)
+        fetch(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}`)
           .then((res) => {
             if (res.status >= 400) {
               throw new Error("Server responds with error!" + res.status);

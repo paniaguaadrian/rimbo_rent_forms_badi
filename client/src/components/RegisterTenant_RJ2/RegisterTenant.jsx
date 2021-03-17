@@ -11,7 +11,7 @@ import styles from "../RegisterTenancy/register-user.module.scss";
 // Validation
 import { newTenant } from "./tenant_validation";
 
-// Constants
+// Reducer Constants
 import { UPDATE_NEWTENANT_INFO } from "./tenant-constants";
 
 // Custom Components
@@ -20,6 +20,14 @@ import InputCheck from "../InputCheck";
 import InputFile from "../InputFile";
 import Button from "../Button";
 import Loader from "react-loader-spinner";
+
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCY,
+  REACT_APP_API_RIMBO_TENANT,
+  REACT_APP_BASE_URL_EMAIL,
+} = process.env;
 
 const RegisterTenant = () => {
   let { tenancyID } = useParams();
@@ -43,7 +51,10 @@ const RegisterTenant = () => {
   useEffect(
     () => {
       const getData = () => {
-        fetch(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`)
+        // ! anadir :tenancyID
+        fetch(
+          `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
+        )
           .then((res) => {
             if (res.status >= 400) {
               throw new Error("Server responds with error!" + res.status);
@@ -86,13 +97,6 @@ const RegisterTenant = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     isSent(false);
-    // const api_rimbo_tenants = process.env.REACT_APP_API_RIMBO_TENANTS;
-    // ! POST to RIMBO_API => DB
-    // Production axios: `${api_rimbo_tenants}`;
-    // Development axios : "http://localhost:8081/api/tenants/tenant/:randomID"
-    // ! POST to email service
-    // Production axios: `${XXXXXXXXXXXXX}`;
-    // Development axios : "http://localhost:8080/submit-email/rj2"
 
     const formData = new FormData();
     for (const key in files) {
@@ -106,27 +110,33 @@ const RegisterTenant = () => {
     setProcessingTo(true);
 
     // ! Post to Rimbo API (files/images)
+    // ! anadir :randomID/upload
     await axios.post(
-      `http://localhost:8081/api/tenants/tenant/${randomID}/upload`,
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/upload`,
       formData,
       { randomID }
     );
 
     // ! Post to Rimbo API Data
-    await axios.post(`http://localhost:8081/api/tenants/tenant/${randomID}`, {
-      // tenant
-      monthlyNetIncome: tenant.monthlyNetIncome,
-      jobType: tenant.jobType,
-      documentType: tenant.documentType,
-      documentNumber: tenant.documentNumber,
-      tenantsAddress: tenant.tenantsAddress,
-      tenantsZipCode: tenant.tenantsZipCode,
-      isAcceptedPrivacy: tenant.isAcceptedPrivacy,
-      randomID: tenancyID,
-    });
+    // ! anadir :randomID
+    await axios.post(
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}`,
+      {
+        // tenant
+        monthlyNetIncome: tenant.monthlyNetIncome,
+        jobType: tenant.jobType,
+        documentType: tenant.documentType,
+        documentNumber: tenant.documentNumber,
+        tenantsAddress: tenant.tenantsAddress,
+        tenantsZipCode: tenant.tenantsZipCode,
+        isAcceptedPrivacy: tenant.isAcceptedPrivacy,
+        randomID: tenancyID,
+      }
+    );
 
     // ! POST to email service
-    await axios.post("http://localhost:8080/submit-email/rj2/tt", {
+    // ! anadir /rj2/tt
+    await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj2/tt`, {
       // Agent/Agency
       agencyName: responseData.agent.agencyName,
       agencyContactPerson: responseData.agent.agencyContactPerson,
@@ -156,7 +166,7 @@ const RegisterTenant = () => {
 
   useEffect(() => {
     const getData = () => {
-      fetch(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`)
+      fetch(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`)
         .then((res) => {
           if (res.status >= 400) {
             throw new Error("Server responds with error!" + res.status);
@@ -180,7 +190,8 @@ const RegisterTenant = () => {
   useEffect(() => {
     const sendAttachments = async () => {
       if (sent) {
-        await axios.post("http://localhost:8080/submit-email/rj2/rimbo", {
+        // ! add /rj2/rimbo
+        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj2/rimbo`, {
           tenancyID,
           tenantsName: responseDataAfter.tenant.tenantsName,
           tenantsPhone: responseDataAfter.tenant.tenantsPhone,

@@ -21,6 +21,13 @@ import Loader from "react-loader-spinner";
 // nanoid
 import { nanoid } from "nanoid";
 
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCY_BADI,
+  REACT_APP_BASE_URL_EMAIL,
+} = process.env;
+
 const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});
   const [isProcessing, setProcessingTo] = useState(false);
@@ -45,32 +52,35 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
 
     const randomID = nanoid();
 
-    await axios.post("http://localhost:8081/api/tenancies/badi", {
-      // tenant
-      tenantsName: tenancy.tenantDetails.tenantName,
-      tenantsEmail: tenancy.tenantDetails.tenantEmail,
-      tenantsPhone: tenancy.tenantDetails.tenantPhone,
-      randomID: randomID,
-      // agency, agent
-      agencyName: tenancy.agencyName,
-      agencyEmailPerson: tenancy.agencyEmailPerson,
-      agencyContactPerson: tenancy.agencyContactPerson,
-      agencyPhonePerson: tenancy.agencyPhonePerson,
-      isAgentAccepted: tenancy.propertyDetails.isAgentAccepted,
-      // property
-      rentalCity: tenancy.propertyDetails.rentalCity,
-      rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
-      rentalAddress: tenancy.propertyDetails.rentalAddress,
-      // tenancy
-      product: tenancy.propertyDetails.product,
-      rentDuration: tenancy.propertyDetails.rentDuration,
-      rentAmount: tenancy.propertyDetails.rentAmount,
-      tenancyID: randomID,
-      // property manager
-      PMName: tenancy.agencyName,
-    });
+    await axios.post(
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY_BADI}`,
+      {
+        // tenant
+        tenantsName: tenancy.tenantDetails.tenantName,
+        tenantsEmail: tenancy.tenantDetails.tenantEmail,
+        tenantsPhone: tenancy.tenantDetails.tenantPhone,
+        randomID: randomID,
+        // agency, agent
+        agencyName: tenancy.agencyName,
+        agencyEmailPerson: tenancy.agencyEmailPerson,
+        agencyContactPerson: tenancy.agencyContactPerson,
+        agencyPhonePerson: tenancy.agencyPhonePerson,
+        isAgentAccepted: tenancy.propertyDetails.isAgentAccepted,
+        // property
+        rentalCity: tenancy.propertyDetails.rentalCity,
+        rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+        rentalAddress: tenancy.propertyDetails.rentalAddress,
+        // tenancy
+        product: tenancy.propertyDetails.product,
+        rentDuration: tenancy.propertyDetails.rentDuration,
+        rentAmount: tenancy.propertyDetails.rentAmount,
+        tenancyID: randomID,
+        // property manager
+        PMName: tenancy.agencyName,
+      }
+    );
 
-    await axios.post("http://localhost:8080/submit-email/rj1", {
+    await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
       tenantsName: tenancy.tenantDetails.tenantName,
       tenantsEmail: tenancy.tenantDetails.tenantEmail,
       tenantsPhone: tenancy.tenantDetails.tenantPhone,

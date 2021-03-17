@@ -19,12 +19,18 @@ import { withNamespaces } from "react-i18next";
 // Normalize & Generic styles
 import "./styles/generic.scss";
 
+console.log(process.env.NODE_ENV);
+
 const App = () => {
   return (
     <>
       <NavBar />
-      <Route exact path="/register/rj1" component={RegisterTenancy} />
-      <Route exact path="/register/rj2/:tenancyID" component={RegisterTenant} />
+      <Route exact path="/register/agent" component={RegisterTenancy} />
+      <Route
+        exact
+        path="/register/tenant/:tenancyID"
+        component={RegisterTenant}
+      />
       <Route
         exact
         path="/register/rj2/:tenancyID/approved"
@@ -45,10 +51,10 @@ const App = () => {
         path="/register/rj3/:tenancyID/card/approved"
         component={ApprovedTenantCardRimbo}
       />
-      <Route exact path="/register/rj3/:randomID" component={StripeHandler} />
+      <Route exact path="/register/card/:randomID" component={StripeHandler} />
       <Route
         exact
-        path="/register/rjs/:tenancyID"
+        path="/register/annex/:tenancyID"
         component={RegisterTenantPM}
       />
       <Route

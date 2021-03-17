@@ -8,7 +8,7 @@ import styles from "../RegisterTenancy/register-user.module.scss";
 // Validation
 import { isLandlord } from "./validation";
 
-// Constants
+// Reducer Constants
 import { UPDATE_LANDLORD_INFO } from "./constants";
 
 // Custom Components
@@ -19,6 +19,13 @@ import Loader from "react-loader-spinner";
 
 // nanoid
 import { nanoid } from "nanoid";
+
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCIES,
+  REACT_APP_BASE_URL_EMAIL,
+} = process.env;
 
 const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});
@@ -34,9 +41,6 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const api_rimbo_tenancies = process.env.REACT_APP_API_RIMBO;
-    // Production axios: `${api_rimbo_tenancies}`;
-    // Development axios : "http://localhost:8081/api/tenancies"
 
     const errors = isLandlord(tenancy.landlordDetails);
     setErrors(errors);
@@ -46,7 +50,9 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
 
     const randomID = nanoid();
 
-    await axios.post("http://localhost:8081/api/tenancies", {
+    // ! Rimbo API
+    // ! Acaba limpia, sin nada que anadir
+    await axios.post(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCIES}`, {
       // tenant
       tenantsName: tenancy.tenantDetails.tenantName,
       tenantsEmail: tenancy.tenantDetails.tenantEmail,
@@ -76,7 +82,9 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
       PMName: tenancy.agencyName,
     });
 
-    await axios.post("http://localhost:8080/submit-email/rj1", {
+    // ! Email API RJ1
+    // ! Anadir rj1
+    await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
       tenantsName: tenancy.tenantDetails.tenantName,
       tenantsEmail: tenancy.tenantDetails.tenantEmail,
       tenantsPhone: tenancy.tenantDetails.tenantPhone,

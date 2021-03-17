@@ -10,7 +10,7 @@ import { TenantStripeReducer, DefaultTenant } from "./tenantStripe-reducer";
 // Stripe Components
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
-// Constants
+// Reducer-Constants
 import { UPDATE_NEWTENANT_INFO } from "./tenantStripe-constants";
 
 // Styles
@@ -36,6 +36,15 @@ const CARD_ELEMENT_OPTIONS = {
   hidePostalCode: true,
 };
 
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCY,
+  REACT_APP_BASE_URL_EMAIL,
+  REACT_APP_BASE_URL_STRIPE,
+  REACT_APP_API_RIMBO_TENANT_STRIPE,
+} = process.env;
+
 const RegisterTenantCard = () => {
   let { randomID } = useParams();
   const tenancyID = randomID;
@@ -56,7 +65,7 @@ const RegisterTenantCard = () => {
 
   useEffect(() => {
     const getData = () => {
-      fetch(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`)
+      fetch(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`)
         .then((res) => {
           if (res.status >= 400) {
             throw new Error("Server responds with error!" + res.status);
@@ -103,21 +112,10 @@ const RegisterTenantCard = () => {
 
     setProcessingTo(true);
 
-    // ! Development / Production API's
-    // * Stripe Action
-    // "http://localhost:8081/stripe/card-wallet" (D)
-    // `${NOMBRE}` (P)
-    // * Emails Action
-    // "http://localhost:8081/submit-email/rj1" (D)
-    // `${NOMBRE}` (P)
-    // * Send data to Rimbo API
-    // "http://localhost:8081/api/enso/tenants" (D)
-    // `${api_rimbo_enso_tenant}` (P)
-
     try {
-      // ! Post a el basckend de stripe en formularios
+      // ! Post a el backend de stripe en formularios
       const { data: client_secret } = await axios.post(
-        "http://localhost:8080/stripe/card-wallet",
+        `${REACT_APP_BASE_URL_STRIPE}/card-wallet`,
         {
           tenantsName,
           tenantsEmail,
@@ -144,7 +142,7 @@ const RegisterTenantCard = () => {
 
         // ! post a nuestra BDD
         await axios.post(
-          `http://localhost:8081/api/tenants/stripe/${randomID}`,
+          `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT_STRIPE}/${randomID}`,
           {
             isAccepted: tenant.isAccepted,
             randomID: randomID,
@@ -152,7 +150,7 @@ const RegisterTenantCard = () => {
         );
 
         // ! Post a el backend de emails en formularios
-        await axios.post("http://localhost:8080/submit-email/rj3", {
+        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj3`, {
           tenantsName,
           tenantsEmail,
           tenantsPhone,

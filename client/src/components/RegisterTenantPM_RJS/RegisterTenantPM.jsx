@@ -9,7 +9,7 @@ import { TenantReducer, DefaultTenant } from "./tenant-reducer";
 // Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
 
-// Constants
+// Reducer-Constants
 import { UPDATE_NEWTENANT_INFO } from "./tenant-constants";
 
 // Custom Components
@@ -17,6 +17,14 @@ import Input from "../Input";
 import InputFile from "../InputFile";
 import Button from "../Button";
 import Loader from "react-loader-spinner";
+
+// End-Points env
+const {
+  REACT_APP_BASE_URL,
+  REACT_APP_API_RIMBO_TENANCY,
+  REACT_APP_API_RIMBO_UPD_TENANCY_BADI,
+  REACT_APP_BASE_URL_EMAIL,
+} = process.env;
 
 const RegisterTenantPM = () => {
   const { tenancyID } = useParams();
@@ -41,7 +49,7 @@ const RegisterTenantPM = () => {
 
   useEffect(() => {
     const getData = () => {
-      fetch(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`)
+      fetch(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`)
         .then((res) => {
           if (res.status >= 400) {
             throw new Error("Server responds with error!" + res.status);
@@ -81,13 +89,6 @@ const RegisterTenantPM = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     isSent(false);
-    // const api_rimbo_tenants = process.env.REACT_APP_API_RIMBO_TENANTS;
-    // ! POST to RIMBO_API => DB
-    // Production axios: `${api_rimbo_tenants}`;
-    // Development axios : "http://localhost:8081/api/tenants/tenant/:randomID"
-    // ! POST to email service
-    // Production axios: `${XXXXXXXXXXXXX}`;
-    // Development axios : "http://localhost:8080/submit-email/rj2"
     setProcessingTo(true);
 
     const formData = new FormData();
@@ -99,12 +100,12 @@ const RegisterTenantPM = () => {
 
     // ! POST to RIMBO_API => DB
     await axios.post(
-      `http://localhost:8081/api/tenancies/tenancy/${tenancyID}`,
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`,
       formData
     );
 
     await axios.post(
-      `http://localhost:8081/api/tenancies/tenancy/badi/${tenancyID}`,
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_UPD_TENANCY_BADI}/${tenancyID}`,
       {
         landlordName: tenant.landlordName,
         landlordEmail: tenant.landlordEmail,
@@ -119,7 +120,7 @@ const RegisterTenantPM = () => {
 
   useEffect(() => {
     const getData = () => {
-      fetch(`http://localhost:8081/api/tenancies/tenancy/${tenancyID}`)
+      fetch(`${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`)
         .then((res) => {
           if (res.status >= 400) {
             throw new Error("Server responds with error!" + res.status);
@@ -143,7 +144,7 @@ const RegisterTenantPM = () => {
   useEffect(() => {
     const sendAttachments = async () => {
       if (sent) {
-        await axios.post("http://localhost:8080/submit-email/rjs", {
+        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rjs`, {
           agencyName: responseDataAfter.agent.agencyName,
           rentalAddress: responseDataAfter.property.rentalAddress,
           tenantsName: responseDataAfter.tenant.tenantsName,
