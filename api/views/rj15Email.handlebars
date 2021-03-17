@@ -381,7 +381,7 @@ a{
             	<tr>
             		<td>
             			<div class="text" style="padding: 0 3em; text-align: center;">
-							<h3>Hello Rimbo Super Team!</h3>		
+							<h3>Hola equipo de Rimbo,</h3>		
             				
             			</div>
             		</td>
@@ -395,13 +395,16 @@ a{
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0 30px;">
-		              	<h3>The tenant <b>{{tenantsName}}</b> who wants to rent the apartment on {{rentalAddress}} with the realtor {{agencyName}} has <b>successfully registered the payment card.</b></h3>
-		            	</div>
+
+							<h3>
+								El inquilino <b>{{tenantsName}}</b> que quiere alquilar el apartamento en {{rentalAddress}} con la agencia {{agencyName}} ha registrado correctamente su tarjeta y ha firmado correctamente los Términos y condiciones en la fecha y hora siguientes:  {{timestamps}}
+							</h3>
+		              
 		          </tr><!-- end: tr -->
 					<td valign="middle" class="hero hero-2 bg_white" style="padding: 2em 0;">
 				
 
-                 <table>
+                 {{!-- <table>
 					<tr>
 						<td>
 							<div class="text" style="padding: 1em 3em; text-align: left;">
@@ -409,13 +412,13 @@ a{
 							</div>
 						</td>
 					</tr>
-			</table>
+			</table> --}}
 
             <table>
 					<tr>
 						<td>
 							<div class="text" style="padding: 1em 3em; text-align: left;">
-								<h4>Click on the following link to accept this tenant.</h4>
+								<h4>Haz clic en el siguiente enlace para aceptar este inquilino.</h4>
 							</div>
 						</td>
 					</tr>
@@ -425,7 +428,7 @@ a{
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0px 30px; color: #6aa3a1;">
-		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj3/{{tenancyID}}/card/approved">Accept</a></button>
+		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj3/{{tenancyID}}/card/approved">Aceptar</a></button>
 						  
 		          </tr><!-- end: tr -->
 					

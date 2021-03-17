@@ -380,7 +380,7 @@ text-decoration: none;
             	<tr>
             		<td>
             			<div class="text" style="padding: 0 3em; text-align: center;">
-							<h3>Hello {{agencyContactPerson}}</h3>		
+							<h3>Hola {{agencyContactPerson}}</h3>		
             			</div>
             		</td>
             	</tr>
@@ -393,7 +393,7 @@ text-decoration: none;
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0 30px;">
-		              	<h3>Great news: Your tenant {{tenantsName}} has successfully passed our screening.</h3>
+		              	<h3>Tu candidato a inquilino, <b>{{tenantsName}}, ha superado con éxito la evaluación de Rimbo.</b></h3>
 
 		            	</div>
 		          </tr><!-- end: tr -->
@@ -403,8 +403,9 @@ text-decoration: none;
                         <tr>
                          <td class="bg_white email-section">
                             <div class="heading-section" style="text-align: center; padding: 0 30px; color: #6aa3a1;">
-                                <h2>Is this the person who will rent the property?</h2>
-                                <h4>Click on the 'Approve' button below to confirm that {{tenantsName}} is selected.</h4>            
+								<h2>¡Es hora de que tomes la decisión final! Recuerda que solo debes aprobar un inquilino por propiedad. </h2>
+                                <h2>¿Es esta la persona que va a alquilar la propiedad?</h2>
+                                <h4>Para continuar con el proceso de alquiler, haz clic en el botón "Aprobar" a continuación y confirma que {{tenantName}} está seleccionado.</h4>            
                                 </div>
                         </tr><!-- end: tr -->
                                         
@@ -415,9 +416,11 @@ text-decoration: none;
 						<td>
 							<div class="text" style="padding: 1em 3em; text-align: left;">
 								
-								<h3>We will contact the tenant to complete the registration now! </h3>
+								<h3>¡Nos pondremos en contacto con el inquilino para completar el registro!</h3>
 
-                                <h4>We will keep you posted.</h4>
+                                <h4>¡Tan pronto como el inquilino registre su tarjeta en Rimbo nos pondremos en contacto contigo!</h4>
+
+								<h4>Mientras tanto, siempre puedes ponerte en contacto con nosotros en info@rimbo.rent!</h4>
 								
 							</div>
 						</td>
@@ -429,9 +432,9 @@ text-decoration: none;
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0px 30px;">
-		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj2/{{tenancyID}}/pm/approved">Approved</a></button>
+		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj2/{{tenancyID}}/pm/approved">¡Aprobar!</a></button>
 
-                        <button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj2/{{tenancyID}}/pm/rejected">Rejected</a></button>
+                        <button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/rj2/{{tenancyID}}/pm/rejected">Rechazar</a></button>
 						  
 		          </tr><!-- end: tr -->
 					
@@ -442,10 +445,10 @@ text-decoration: none;
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: left; padding: 0px 30px; color: #6aa3a1;">
 		              	
-						<h3>Support Team,</h3>
-		              	<h4>Phone - WhatsApp: +34 623 063 769<br/>
+						<h3>Equipo de Soporte,</h3>
+		              	<h4>Móvil -  WhatsApp: +34 623 063 769<br/>
       					E-Mail: info@rimbo.com<br/>
-      					Web site: <a href="http://www.rimbo.rent">rimbo.rent</a>
+      					Web: <a href="http://www.rimbo.rent">rimbo.rent</a>
       					</h4>
 		            	</div>
 		          </tr><!-- end: tr -->
