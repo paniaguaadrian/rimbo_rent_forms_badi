@@ -25,7 +25,7 @@ const Completed = ({ tenancy }) => {
         </h3>
         <p>
           We just sent you an email to <b>{`${tenancy.agencyEmailPerson}`}</b>{" "}
-          with all the information and next instructions for you.
+          with all the information and next instructions for you
         </p>
         <h3>Best regards</h3>
       </div>

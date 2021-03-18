@@ -52,14 +52,14 @@ handlers:
 
 # [START variables]
 env_variables:
-  REACT_APP_BASE_URL: https://rimbo-api-dot-rimbo-302814.ew.r.appspot.com/api
+  REACT_APP_BASE_URL: https://rimbo-api-dot-rimbo-test.ew.r.appspot.com/api
   REACT_APP_API_RIMBO_TENANCY: /tenancies/tenancy
   REACT_APP_API_RIMBO_TENANCY_BADI: /tenancies/tenancy/badi
   REACT_APP_API_RIMBO_TENANCIES: /tenancies
   REACT_APP_API_RIMBO_TENANT: /tenants/tenant
   REACT_APP_API_RIMBO_TENANT_STRIPE: /tenants/stripe
-  REACT_APP_BASE_URL_EMAIL: https://badibackend-dot-rimbo-badi.oa.r.appspot.com/submit-email
-  REACT_APP_BASE_URL_STRIPE: https://badibackend-dot-rimbo-badi.oa.r.appspot.com/stripe
+  REACT_APP_BASE_URL_EMAIL: https://badibackend-dot-rimbo-test.ew.r.appspot.com/submit-email
+  REACT_APP_BASE_URL_STRIPE: https://badibackend-dot-rimbo-test.ew.r.appspot.com/stripe
 # [END variables]
 
 # REACT_APP_API_RIMBO: "https://rimbo-api-dot-rimbo-302814.ew.r.appspot.com/api/tenancies"

@@ -91,10 +91,7 @@ const ApprovedTenantCardRimbo = () => {
         <div className={styles.SuccessPageText}>
           <h1>The tenant has been accepted after the debit card request.</h1>
           <h2>You have successfully accepted the tenant</h2>
-          <p>
-            The PM already recieves the RJ16 Email and the Tenant already
-            recieves the RJXX5 Email.
-          </p>
+          <p>The PM and the Tenant will receive a confirmation email.</p>
         </div>
       </div>
     </>

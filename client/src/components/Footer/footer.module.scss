@@ -18,13 +18,14 @@
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    height: 140px;
+    // height: 140px;
     justify-content: space-between;
     align-items: center;
     padding: 2rem 2rem;
     background-color: #032040;
     color: white;
     font-weight: 500;
+    bottom: 0;
   }
 
   .FooterLogo {
