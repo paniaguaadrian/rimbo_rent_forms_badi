@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+// React Components
+import React, { useState, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet";
 
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { TenantReducer, DefaultTenant } from "./approved_tenant_card-reducer";
 
 // Styles
 import styles from "../approvedTenantRimbo/approved-user.module.scss";
@@ -11,6 +13,7 @@ import styles from "../approvedTenantRimbo/approved-user.module.scss";
 const {
   REACT_APP_BASE_URL,
   REACT_APP_API_RIMBO_TENANCY,
+  REACT_APP_API_RIMBO_TENANT,
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
 
@@ -18,39 +21,55 @@ const ApprovedTenantCardRimbo = () => {
   let { tenancyID } = useParams();
   const randomID = tenancyID;
 
+  const [tenant] = useReducer(TenantReducer, DefaultTenant);
+  const [state, setState] = useState(null); // eslint-disable-line
+
   useEffect(() => {
-    // Simplify fetchUserData.
+    // Function to fetch All data from THIS tenancy in particular
     const fetchUserData = () =>
       axios.get(
         `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
       );
 
+    // Add body to post decision. So we can send data.
+    const postDecision = (body) =>
+      axios.post(
+        `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/card/approved`,
+        body
+      );
+
     const processDecision = async () => {
       const { data: tenancyData } = await fetchUserData();
-      // let's console.log userData here, so we know it is in the right format.
-      //   console.log(tenancyData);
+      const postBody = {
+        isCardAccepted: tenant.isCardAccepted,
+        randomID: tenancyData.tenant.randomID,
+      };
+      const { data: decisionResult } = await postDecision(postBody);
 
-      const { tenantsName, tenantsEmail } = tenancyData.tenant;
-
+      const { tenantsName, tenantsEmail, randomID } = tenancyData.tenant;
       const {
         agencyContactPerson,
         agencyEmailPerson,
         agencyName,
       } = tenancyData.agent;
 
-      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj15`, {
-        tenantsName,
-        tenantsEmail,
-        agencyContactPerson,
-        agencyEmailPerson,
-        agencyName,
-        tenancyID,
-        randomID,
-      });
-    };
+      const tenancyID = tenancyData.tenancyID;
 
+      if (tenancyData.tenant.isCardAccepted === false) {
+        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj15`, {
+          tenantsName,
+          tenantsEmail,
+          agencyContactPerson,
+          agencyEmailPerson,
+          agencyName,
+          tenancyID,
+          randomID,
+        });
+      }
+      setState(decisionResult);
+    };
     processDecision();
-  }, [randomID, tenancyID]);
+  }, [randomID, tenant.isCardAccepted, tenancyID]);
 
   return (
     <>

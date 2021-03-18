@@ -19,8 +19,6 @@ import { withNamespaces } from "react-i18next";
 // Normalize & Generic styles
 import "./styles/generic.scss";
 
-console.log(process.env.NODE_ENV);
-
 const App = () => {
   return (
     <>
