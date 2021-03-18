@@ -30,7 +30,7 @@ const RegisterTenancy = ({ t }) => {
               <p>{t("RJ1.header.subtitleThree")}</p>
             </div>
             <h4>
-              Step {step + 1} / {steps.length} -{" "}
+              Step {step + 1} / {steps.length - 1} -{" "}
               <span>{steps[`${step}`].title}</span>
             </h4>
           </div>

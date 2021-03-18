@@ -265,10 +265,10 @@ const RegisterTenantPM = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.SuccessPageContainer}>
-          <div className={styles.SuccessPageText}>
+        <div className={styles.CompleteContainer}>
+          <div className={styles.CompleteText}>
             <h1>The form has been completed successfully</h1>
-            <h2>All data has been successfully completed</h2>
+            <h3>All data has been successfully completed</h3>
             <p>
               Thanks for your time <b>{responseData.tenant.tenantsName}</b>, We
               will contact you shortly to give you more details of the process.

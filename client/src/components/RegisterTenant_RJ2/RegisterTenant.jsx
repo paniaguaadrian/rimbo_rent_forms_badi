@@ -290,6 +290,46 @@ const RegisterTenant = () => {
                   />
 
                   <div className={styles.selectContainer}>
+                    <label className={styles.selectLabel} htmlFor="jobType">
+                      Job Type
+                    </label>
+                    <select
+                      required
+                      name="jobType"
+                      className={styles.selectInput}
+                      value={tenant.jobType}
+                      onChange={(e) => handleNewTenant(e)}
+                      error={errors.jobType}
+                    >
+                      <option value="">Select your job type</option>
+                      {jobType.map((c) => (
+                        <option key={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <Input
+                    type="text"
+                    name="tenantsAddress"
+                    value={tenant.tenantsAddress}
+                    label="Current Address"
+                    placeholder="Write the address where you reside"
+                    onChange={(e) => handleNewTenant(e)}
+                    error={errors.tenantsAddress}
+                  />
+                  <Input
+                    type="number"
+                    name="tenantsZipCode"
+                    value={tenant.tenantsZipCode}
+                    label="Current zip code"
+                    placeholder="XXXXX"
+                    onChange={(e) => handleNewTenant(e)}
+                    error={errors.tenantsZipCode}
+                  />
+                </div>
+
+                <div className={styles.FormRight}>
+                  <div className={styles.selectContainer}>
                     <label
                       className={styles.selectLabel}
                       htmlFor="documentType"
@@ -312,36 +352,6 @@ const RegisterTenant = () => {
                   </div>
                   <Input
                     type="text"
-                    name="tenantsAddress"
-                    value={tenant.tenantsAddress}
-                    label="Current Address"
-                    placeholder="Write the address where you reside"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.tenantsAddress}
-                  />
-                </div>
-
-                <div className={styles.FormRight}>
-                  <div className={styles.selectContainer}>
-                    <label className={styles.selectLabel} htmlFor="jobType">
-                      Job Type
-                    </label>
-                    <select
-                      required
-                      name="jobType"
-                      className={styles.selectInput}
-                      value={tenant.jobType}
-                      onChange={(e) => handleNewTenant(e)}
-                      error={errors.jobType}
-                    >
-                      <option value="">Select your job type</option>
-                      {jobType.map((c) => (
-                        <option key={c}>{c}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <Input
-                    type="text"
                     name="documentNumber"
                     value={tenant.documentNumber}
                     label="Document Number"
@@ -349,19 +359,7 @@ const RegisterTenant = () => {
                     onChange={(e) => handleNewTenant(e)}
                     error={errors.documentNumber}
                   />
-                  <Input
-                    type="number"
-                    name="tenantsZipCode"
-                    value={tenant.tenantsZipCode}
-                    label="Current zip code"
-                    placeholder="XXXXX"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.tenantsZipCode}
-                  />
-                </div>
-              </div>
-              <div className={styles.FormIntern}>
-                <div className={styles.FormLeft}>
+
                   <InputFile
                     type="file"
                     name="DF"
@@ -378,8 +376,6 @@ const RegisterTenant = () => {
                     onChange={changeHandler}
                     required
                   />
-                </div>
-                <div className={styles.FormRight}>
                   <InputFile
                     type="file"
                     name="DCA"
@@ -388,6 +384,10 @@ const RegisterTenant = () => {
                     required
                   />
                 </div>
+              </div>
+              <div className={styles.FormIntern}>
+                <div className={styles.FormLeft}></div>
+                <div className={styles.FormRight}></div>
               </div>
 
               <div className={styles.TermsContainer}>
@@ -445,14 +445,15 @@ const RegisterTenant = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.SuccessPageContainer}>
-          <div className={styles.SuccessPageText}>
+        <div className={styles.CompleteContainer}>
+          <div className={styles.CompleteText}>
             <h1>The form has been completed successfully</h1>
-            <h2>All data has been successfully completed</h2>
+            <h3>All data has been successfully completed</h3>
             <p>
               Thanks for your time <b>{responseData.tenant.tenantsName}</b>, We
               will contact you shortly to give you more details of the process.
             </p>
+            <h3>Best regards</h3>
           </div>
         </div>
       )}

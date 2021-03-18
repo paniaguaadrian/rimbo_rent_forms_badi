@@ -209,8 +209,8 @@ const RegisterTenantCard = () => {
                     the charge authorization
                   </h2>
                   <div>
-                    {tenancyData === "Administración" ||
-                    tenancyData === "Administration" ? (
+                    {tenancyData.product === "Administración" ||
+                    tenancyData.product === "Administration" ? (
                       <p>
                         * The card will NOT be blocked. The card will NOT be
                         charged now. Only in case of legal claims presented by
@@ -291,10 +291,10 @@ const RegisterTenantCard = () => {
           )}
         </div>
       ) : (
-        <div className={styles.SuccessPageContainer}>
-          <div className={styles.SuccessPageText}>
+        <div className={styles.CompleteContainer}>
+          <div className={styles.CompleteText}>
             <h1>Your payment has been successfully completed</h1>
-            <h4>You will shortly receive an email with more details.</h4>
+            <h3>You will shortly receive an email with more details.</h3>
             <p>
               Thanks for your time <b>{tenancyData.tenant.tenantsName}</b>, We
               will contact you shortly to give you more details of the process.

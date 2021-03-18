@@ -2,8 +2,10 @@
 import { Route } from "react-router-dom";
 
 // Custom Components
+import Home from "./screens/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+
 import RegisterTenancy from "./components/RegisterTenancy";
 import RegisterTenant from "./components/RegisterTenant_RJ2/RegisterTenant";
 import StripeHandler from "./components/RegisterTenantCard_RJ3/StripeHandlerComponent";
@@ -23,6 +25,7 @@ const App = () => {
   return (
     <>
       <NavBar />
+      <Route exact path="/" component={Home} />
       <Route exact path="/register/agent" component={RegisterTenancy} />
       <Route
         exact
