@@ -48,7 +48,8 @@ const RegisterTenant = () => {
   const [files, setFiles] = useState({
     DF: null,
     DB: null,
-    DCA: null,
+    LP: null,
+    PP: null,
   });
   const [sent, isSent] = useState(false);
   const [responseDataAfter, setResponseDataAfter] = useState([]);
@@ -234,8 +235,8 @@ const RegisterTenant = () => {
           agencyEmailPerson: responseDataAfter.agent.agencyEmailPerson,
           documentImageFront: responseDataAfter.tenant.documentImageFront,
           documentImageBack: responseDataAfter.tenant.documentImageBack,
-          documentConfirmAddress:
-            responseDataAfter.tenant.documentConfirmAddress,
+          lastPayslip: responseDataAfter.tenant.lastPayslip,
+          previousPayslip: responseDataAfter.tenant.previousPayslip,
           // Agent/Agency
           monthlyNetIncome: tenant.monthlyNetIncome,
           jobType: tenant.jobType,
@@ -426,14 +427,25 @@ const RegisterTenant = () => {
                     />
                   </div>
                 </div>
-                <div className={style.GroupInputAlone}>
-                  <InputFile
-                    type="file"
-                    name="DCA"
-                    label="Document confirming your current address (eg receipt of supplies)"
-                    onChange={changeHandler}
-                    required
-                  />
+                <div className={style.GroupInput}>
+                  <div className={style.FormLeft}>
+                    <InputFile
+                      type="file"
+                      name="LP"
+                      label="Last salary payslip"
+                      onChange={changeHandler}
+                      required
+                    />
+                  </div>
+                  <div className={style.FormLeft}>
+                    <InputFile
+                      type="file"
+                      name="PP"
+                      label="Previous salary payslip"
+                      onChange={changeHandler}
+                      required
+                    />
+                  </div>
                 </div>
               </div>
 

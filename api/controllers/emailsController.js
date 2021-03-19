@@ -58,6 +58,11 @@ const sendRJ1FormEmails = async (req, res) => {
         path: "./views/images/rimbo-logo.png",
         cid: "rimbologo",
       },
+      {
+        filename: "badi-logo.png",
+        path: "./views/images/badi-logo.png",
+        cid: "badilogo",
+      },
     ],
     template: "rj3Email",
     context: {
