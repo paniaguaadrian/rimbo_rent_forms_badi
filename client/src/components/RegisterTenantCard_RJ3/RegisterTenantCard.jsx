@@ -13,6 +13,10 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 // Reducer-Constants
 import { UPDATE_NEWTENANT_INFO } from "./tenantStripe-constants";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // Styles
 import Loader from "react-loader-spinner";
 import styles from "../RegisterTenancy/register-user.module.scss";
@@ -149,19 +153,34 @@ const RegisterTenantCard = () => {
           }
         );
 
-        // ! Post a el backend de emails en formularios
-        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj3`, {
-          tenantsName,
-          tenantsEmail,
-          tenantsPhone,
-          timestamps,
-          agencyEmailPerson: tenancyData.agent.agencyEmailPerson,
-          agencyContactPerson: tenancyData.agent.agencyContactPerson,
-          agencyName: tenancyData.agent.agencyName,
-          rentalAddress: tenancyData.property.rentalAddress,
-          randomID,
-          tenancyID,
-        });
+        // ! Post to Email service
+        if (i18n.language === "en") {
+          await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj3`, {
+            tenantsName,
+            tenantsEmail,
+            tenantsPhone,
+            timestamps,
+            agencyEmailPerson: tenancyData.agent.agencyEmailPerson,
+            agencyContactPerson: tenancyData.agent.agencyContactPerson,
+            agencyName: tenancyData.agent.agencyName,
+            rentalAddress: tenancyData.property.rentalAddress,
+            randomID,
+            tenancyID,
+          });
+        } else {
+          await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj3`, {
+            tenantsName,
+            tenantsEmail,
+            tenantsPhone,
+            timestamps,
+            agencyEmailPerson: tenancyData.agent.agencyEmailPerson,
+            agencyContactPerson: tenancyData.agent.agencyContactPerson,
+            agencyName: tenancyData.agent.agencyName,
+            rentalAddress: tenancyData.property.rentalAddress,
+            randomID,
+            tenancyID,
+          });
+        }
       }
     } catch (err) {
       setCheckoutError(err.message);

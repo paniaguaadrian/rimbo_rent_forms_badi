@@ -21,6 +21,10 @@ import InputFile from "../InputFile";
 import Button from "../Button";
 import Loader from "react-loader-spinner";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -135,31 +139,58 @@ const RegisterTenant = () => {
     );
 
     // ! POST to email service
-    // ! anadir /rj2/tt
-    await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj2/tt`, {
-      // Agent/Agency
-      agencyName: responseData.agent.agencyName,
-      agencyContactPerson: responseData.agent.agencyContactPerson,
-      agencyPhonePerson: responseData.agent.agencyPhonePerson,
-      agencyEmailPerson: responseData.agent.agencyEmailPerson,
-      tenancyID,
-      // Tenant
-      tenantsName: responseData.tenant.tenantsName,
-      tenantsPhone: responseData.tenant.tenantsPhone,
-      tenantsEmail: responseData.tenant.tenantsEmail,
-      monthlyNetIncome: tenant.monthlyNetIncome,
-      jobType: tenant.jobType,
-      documentNumber: tenant.documentNumber,
-      tenantsAddress: tenant.tenantsAddress,
-      tenantsZipCode: tenant.tenantsZipCode,
-      // Proprety
-      rentAmount: responseData.rentAmount,
-      product: responseData.product,
-      rentDuration: responseData.rentDuration,
-      rentalAddress: responseData.property.rentalAddress,
-      rentalCity: responseData.property.rentalCity,
-      rentalPostalCode: responseData.property.rentalPostalCode,
-    });
+    if (i18n.language === "en") {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj2/tt`, {
+        // Agent/Agency
+        agencyName: responseData.agent.agencyName,
+        agencyContactPerson: responseData.agent.agencyContactPerson,
+        agencyPhonePerson: responseData.agent.agencyPhonePerson,
+        agencyEmailPerson: responseData.agent.agencyEmailPerson,
+        tenancyID,
+        // Tenant
+        tenantsName: responseData.tenant.tenantsName,
+        tenantsPhone: responseData.tenant.tenantsPhone,
+        tenantsEmail: responseData.tenant.tenantsEmail,
+        monthlyNetIncome: tenant.monthlyNetIncome,
+        jobType: tenant.jobType,
+        documentNumber: tenant.documentNumber,
+        tenantsAddress: tenant.tenantsAddress,
+        tenantsZipCode: tenant.tenantsZipCode,
+        // Proprety
+        rentAmount: responseData.rentAmount,
+        product: responseData.product,
+        rentDuration: responseData.rentDuration,
+        rentalAddress: responseData.property.rentalAddress,
+        rentalCity: responseData.property.rentalCity,
+        rentalPostalCode: responseData.property.rentalPostalCode,
+      });
+    } else {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj2/tt`, {
+        // Agent/Agency
+        agencyName: responseData.agent.agencyName,
+        agencyContactPerson: responseData.agent.agencyContactPerson,
+        agencyPhonePerson: responseData.agent.agencyPhonePerson,
+        agencyEmailPerson: responseData.agent.agencyEmailPerson,
+        tenancyID,
+        // Tenant
+        tenantsName: responseData.tenant.tenantsName,
+        tenantsPhone: responseData.tenant.tenantsPhone,
+        tenantsEmail: responseData.tenant.tenantsEmail,
+        monthlyNetIncome: tenant.monthlyNetIncome,
+        jobType: tenant.jobType,
+        documentNumber: tenant.documentNumber,
+        tenantsAddress: tenant.tenantsAddress,
+        tenantsZipCode: tenant.tenantsZipCode,
+        // Proprety
+        rentAmount: responseData.rentAmount,
+        product: responseData.product,
+        rentDuration: responseData.rentDuration,
+        rentalAddress: responseData.property.rentalAddress,
+        rentalCity: responseData.property.rentalCity,
+        rentalPostalCode: responseData.property.rentalPostalCode,
+      });
+    }
+
     isSent(true);
     setIsSuccessfullySubmitted(true);
   };

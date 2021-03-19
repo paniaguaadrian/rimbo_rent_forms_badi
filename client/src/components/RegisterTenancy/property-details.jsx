@@ -36,14 +36,6 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [errors, setErrors] = useState({});
   const [isProcessing, setProcessingTo] = useState(false);
 
-  // Language
-  console.log(i18n);
-  if (i18n.language === "en") {
-    console.log("Esto es ingles");
-  } else {
-    console.log("Esto es espa;ol");
-  }
-
   // Handle on change
   const handleAgency = ({ target }) => {
     setTenancy({
@@ -92,27 +84,45 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
       }
     );
 
-    await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
-      tenantsName: tenancy.tenantDetails.tenantName,
-      tenantsEmail: tenancy.tenantDetails.tenantEmail,
-      tenantsPhone: tenancy.tenantDetails.tenantPhone,
-      agencyName: tenancy.agencyName,
-      agencyContactPerson: tenancy.agencyContactPerson,
-      agencyPhonePerson: tenancy.agencyPhonePerson,
-      agencyEmailPerson: tenancy.agencyEmailPerson,
-      rentDuration: tenancy.propertyDetails.rentDuration,
-      product: tenancy.propertyDetails.product,
-      rentAmount: tenancy.propertyDetails.rentAmount,
-      rentalAddress: tenancy.propertyDetails.rentalAddress,
-      rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
-      rentalCity: tenancy.propertyDetails.rentalCity,
-      randomID,
-    });
+    // ! Post to Email service
+    if (i18n.language === "en") {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj1`, {
+        tenantsName: tenancy.tenantDetails.tenantName,
+        tenantsEmail: tenancy.tenantDetails.tenantEmail,
+        tenantsPhone: tenancy.tenantDetails.tenantPhone,
+        agencyName: tenancy.agencyName,
+        agencyContactPerson: tenancy.agencyContactPerson,
+        agencyPhonePerson: tenancy.agencyPhonePerson,
+        agencyEmailPerson: tenancy.agencyEmailPerson,
+        rentDuration: tenancy.propertyDetails.rentDuration,
+        product: tenancy.propertyDetails.product,
+        rentAmount: tenancy.propertyDetails.rentAmount,
+        rentalAddress: tenancy.propertyDetails.rentalAddress,
+        rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+        rentalCity: tenancy.propertyDetails.rentalCity,
+        randomID,
+      });
+    } else {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
+        tenantsName: tenancy.tenantDetails.tenantName,
+        tenantsEmail: tenancy.tenantDetails.tenantEmail,
+        tenantsPhone: tenancy.tenantDetails.tenantPhone,
+        agencyName: tenancy.agencyName,
+        agencyContactPerson: tenancy.agencyContactPerson,
+        agencyPhonePerson: tenancy.agencyPhonePerson,
+        agencyEmailPerson: tenancy.agencyEmailPerson,
+        rentDuration: tenancy.propertyDetails.rentDuration,
+        product: tenancy.propertyDetails.product,
+        rentAmount: tenancy.propertyDetails.rentAmount,
+        rentalAddress: tenancy.propertyDetails.rentalAddress,
+        rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+        rentalCity: tenancy.propertyDetails.rentalCity,
+        randomID,
+      });
+    }
 
     setStep(step + 1);
   };
-
-  // Values for Select input
 
   const services = ["Administración", "Gestión", "Protección"];
 

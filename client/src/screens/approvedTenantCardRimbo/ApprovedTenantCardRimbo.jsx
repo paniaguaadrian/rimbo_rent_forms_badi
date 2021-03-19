@@ -9,6 +9,10 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_card-reducer";
 // Styles
 import styles from "../approvedTenantRimbo/approved-user.module.scss";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -56,15 +60,27 @@ const ApprovedTenantCardRimbo = () => {
       const tenancyID = tenancyData.tenancyID;
 
       if (tenancyData.tenant.isCardAccepted === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj15`, {
-          tenantsName,
-          tenantsEmail,
-          agencyContactPerson,
-          agencyEmailPerson,
-          agencyName,
-          tenancyID,
-          randomID,
-        });
+        if (i18n.language === "en") {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj15`, {
+            tenantsName,
+            tenantsEmail,
+            agencyContactPerson,
+            agencyEmailPerson,
+            agencyName,
+            tenancyID,
+            randomID,
+          });
+        } else {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj15`, {
+            tenantsName,
+            tenantsEmail,
+            agencyContactPerson,
+            agencyEmailPerson,
+            agencyName,
+            tenancyID,
+            randomID,
+          });
+        }
       }
       setState(decisionResult);
     };

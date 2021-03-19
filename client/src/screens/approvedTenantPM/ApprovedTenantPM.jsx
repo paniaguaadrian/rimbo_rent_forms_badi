@@ -9,6 +9,10 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_pm-reducer";
 // Styles
 import styles from "../approvedTenantRimbo/approved-user.module.scss";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -82,26 +86,49 @@ const ApprovedTenantPM = () => {
 
       // Don't send an email if the tenant is already accepted
       if (tenancyData.tenant.isPMAccepted === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rjpm`, {
-          tenancyID,
-          randomID,
-          tenantsName,
-          tenantsEmail,
-          tenantsPhone,
-          monthlyNetIncome,
-          jobType,
-          documentNumber,
-          agencyContactPerson,
-          agencyEmailPerson,
-          agencyName,
-          agencyPhonePerson,
-          rentAmount,
-          product,
-          rentDuration,
-          rentalAddress,
-          rentalCity,
-          rentalPostalCode,
-        });
+        if (i18n.language === "en") {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rjpm`, {
+            tenancyID,
+            randomID,
+            tenantsName,
+            tenantsEmail,
+            tenantsPhone,
+            monthlyNetIncome,
+            jobType,
+            documentNumber,
+            agencyContactPerson,
+            agencyEmailPerson,
+            agencyName,
+            agencyPhonePerson,
+            rentAmount,
+            product,
+            rentDuration,
+            rentalAddress,
+            rentalCity,
+            rentalPostalCode,
+          });
+        } else {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/rjpm`, {
+            tenancyID,
+            randomID,
+            tenantsName,
+            tenantsEmail,
+            tenantsPhone,
+            monthlyNetIncome,
+            jobType,
+            documentNumber,
+            agencyContactPerson,
+            agencyEmailPerson,
+            agencyName,
+            agencyPhonePerson,
+            rentAmount,
+            product,
+            rentDuration,
+            rentalAddress,
+            rentalCity,
+            rentalPostalCode,
+          });
+        }
       }
 
       setState(decisionResult);

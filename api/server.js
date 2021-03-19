@@ -12,6 +12,7 @@ import Stripe from "stripe";
 
 // Routes imported
 import emailRoutes from "./routes/emailRoutes.js";
+import emailEnRoutes from "./routes/emailEnRoutes.js";
 
 // Use dotenv to store variables
 dotenv.config();
@@ -50,6 +51,7 @@ app.get("/", (req, res) => {
 
 // * Declare routes and URL
 app.use("/submit-email", emailRoutes);
+app.use("/submit-email/en", emailEnRoutes);
 
 // * Stripe action =====> START
 app.get("/stripe/card-wallet", (req, res) => {

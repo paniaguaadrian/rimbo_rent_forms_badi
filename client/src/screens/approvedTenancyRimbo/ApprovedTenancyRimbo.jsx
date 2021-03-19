@@ -9,6 +9,10 @@ import { TenantReducer, DefaultTenant } from "./approved_tenancy_rimbo-reducer";
 // Styles
 import styles from "../approvedTenantRimbo/approved-user.module.scss";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -64,15 +68,27 @@ const ApprovedTenancyRimbo = () => {
 
       // Don't send an email if the tenancy is already accepted
       if (tenancyData.rentStart === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj18`, {
-          tenancyID,
-          randomID,
-          tenantsName,
-          tenantsEmail,
-          agencyContactPerson,
-          agencyEmailPerson,
-          rentalAddress,
-        });
+        if (i18n.language === "en") {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj18`, {
+            tenancyID,
+            randomID,
+            tenantsName,
+            tenantsEmail,
+            agencyContactPerson,
+            agencyEmailPerson,
+            rentalAddress,
+          });
+        } else {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj18`, {
+            tenancyID,
+            randomID,
+            tenantsName,
+            tenantsEmail,
+            agencyContactPerson,
+            agencyEmailPerson,
+            rentalAddress,
+          });
+        }
       }
 
       setState(decisionResult);

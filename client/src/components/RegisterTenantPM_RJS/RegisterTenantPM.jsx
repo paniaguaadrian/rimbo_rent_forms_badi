@@ -18,6 +18,10 @@ import InputFile from "../InputFile";
 import Button from "../Button";
 import Loader from "react-loader-spinner";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -35,12 +39,7 @@ const RegisterTenantPM = () => {
   const [responseData, setResponseData] = useState([]);
   const [loading, setLoading] = useState(false); //eslint-disable-line
   const [err, setErr] = useState(null); //eslint-disable-line
-
   const [date, setDate] = useState("");
-  // const [landlordName, setLandlordName] = useState("");
-  // const [landlordEmail, setLandlordEmail] = useState("");
-  // const [landlordPhone, setLandlordPhone] = useState("");
-
   const [files, setFiles] = useState({
     pmAnex: null,
   });
@@ -144,13 +143,23 @@ const RegisterTenantPM = () => {
   useEffect(() => {
     const sendAttachments = async () => {
       if (sent) {
-        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rjs`, {
-          agencyName: responseDataAfter.agent.agencyName,
-          rentalAddress: responseDataAfter.property.rentalAddress,
-          tenantsName: responseDataAfter.tenant.tenantsName,
-          pmAnex: responseDataAfter.pmAnex,
-          tenancyID: tenancyID,
-        });
+        if (i18n.language === "en") {
+          await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rjs`, {
+            agencyName: responseDataAfter.agent.agencyName,
+            rentalAddress: responseDataAfter.property.rentalAddress,
+            tenantsName: responseDataAfter.tenant.tenantsName,
+            pmAnex: responseDataAfter.pmAnex,
+            tenancyID: tenancyID,
+          });
+        } else {
+          await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rjs`, {
+            agencyName: responseDataAfter.agent.agencyName,
+            rentalAddress: responseDataAfter.property.rentalAddress,
+            tenantsName: responseDataAfter.tenant.tenantsName,
+            pmAnex: responseDataAfter.pmAnex,
+            tenancyID: tenancyID,
+          });
+        }
       }
     };
     sendAttachments();

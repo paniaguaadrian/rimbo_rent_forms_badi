@@ -9,6 +9,10 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_rimbo-reducer";
 // Styles
 import styles from "./approved-user.module.scss";
 
+// Multi language
+// import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -58,13 +62,23 @@ const ApprovedTenantRimbo = () => {
       const tenancyID = tenancyData.tenancyID;
 
       if (tenancyData.tenant.isRimboAccepted === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj11`, {
-          tenantsName,
-          agencyContactPerson,
-          agencyEmailPerson,
-          tenancyID,
-          randomID,
-        });
+        if (i18n.language === "en") {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj11`, {
+            tenantsName,
+            agencyContactPerson,
+            agencyEmailPerson,
+            tenancyID,
+            randomID,
+          });
+        } else {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj11`, {
+            tenantsName,
+            agencyContactPerson,
+            agencyEmailPerson,
+            tenancyID,
+            randomID,
+          });
+        }
       }
 
       setState(decisionResult);
