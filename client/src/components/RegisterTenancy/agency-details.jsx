@@ -21,7 +21,7 @@ import { withNamespaces } from "react-i18next";
 const AgencyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [errors, setErrors] = useState({});
 
-  // Handle on change
+  // Handle on change.
   const handleAgency = ({ target }) => {
     setTenancy({
       type: UPDATE_TENANCY_INFO,

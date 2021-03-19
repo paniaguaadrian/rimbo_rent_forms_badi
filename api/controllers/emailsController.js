@@ -8,7 +8,7 @@ import hbs from "nodemailer-express-handlebars";
 const testEmail = "paniaguasanchezadrian@gmail.com";
 
 // ? =======>  SPANISH VERSION START ==============================>
-// ! RJ1 Form => RJ3, RJ4, RJD Emails
+// ! RJ1 Form => RJ3, RJ4, RJD Emails.
 const sendRJ1FormEmails = async (req, res) => {
   const {
     tenantsName,
