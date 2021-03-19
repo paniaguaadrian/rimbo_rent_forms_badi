@@ -7,6 +7,7 @@ import { TenantReducer, DefaultTenant } from "./tenant-reducer";
 
 // Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
+import style from "./form.module.scss";
 
 // Validation
 import { newTenant } from "./tenant_validation";
@@ -302,111 +303,130 @@ const RegisterTenant = () => {
               </p>
             </div>
           </div>
-          <div className={styles.FormContent}>
+          <div className={style.FormContent}>
             <form
               onSubmit={handleSubmit}
               className={styles.RegisterForm}
               encType="multipart/form-data"
             >
-              <div className={styles.FormIntern}>
-                <div className={styles.FormLeft}>
-                  <Input
-                    type="number"
-                    name="monthlyNetIncome"
-                    value={tenant.monthlyNetIncome}
-                    label="Monthly net income"
-                    placeholder="Write your income"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.monthlyNetIncome}
-                  />
-
-                  <div className={styles.selectContainer}>
-                    <label className={styles.selectLabel} htmlFor="jobType">
-                      Job Type
-                    </label>
-                    <select
-                      required
-                      name="jobType"
-                      className={styles.selectInput}
-                      value={tenant.jobType}
+              <div className={style.FormIntern}>
+                <div className={style.GroupInput}>
+                  <div className={style.FormLeft}>
+                    <Input
+                      type="number"
+                      name="monthlyNetIncome"
+                      value={tenant.monthlyNetIncome}
+                      label="Monthly net income"
+                      placeholder="Write your income"
                       onChange={(e) => handleNewTenant(e)}
-                      error={errors.jobType}
-                    >
-                      <option value="">Select your job type</option>
-                      {jobType.map((c) => (
-                        <option key={c}>{c}</option>
-                      ))}
-                    </select>
+                      error={errors.monthlyNetIncome}
+                    />
                   </div>
-
-                  <Input
-                    type="text"
-                    name="tenantsAddress"
-                    value={tenant.tenantsAddress}
-                    label="Current Address"
-                    placeholder="Write the address where you reside"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.tenantsAddress}
-                  />
-                  <Input
-                    type="number"
-                    name="tenantsZipCode"
-                    value={tenant.tenantsZipCode}
-                    label="Current zip code"
-                    placeholder="XXXXX"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.tenantsZipCode}
-                  />
+                  <div className={style.FormLeft}>
+                    <div className={styles.selectContainer}>
+                      <label className={styles.selectLabel} htmlFor="jobType">
+                        Job Type
+                      </label>
+                      <select
+                        required
+                        name="jobType"
+                        className={styles.selectInput}
+                        value={tenant.jobType}
+                        onChange={(e) => handleNewTenant(e)}
+                        error={errors.jobType}
+                      >
+                        <option value="">Select your job type</option>
+                        {jobType.map((c) => (
+                          <option key={c}>{c}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
                 </div>
-
-                <div className={styles.FormRight}>
-                  <div className={styles.selectContainer}>
-                    <label
-                      className={styles.selectLabel}
-                      htmlFor="documentType"
-                    >
-                      Document Type
-                    </label>
-                    <select
-                      required
-                      name="documentType"
-                      className={styles.selectInput}
-                      value={tenant.documentType}
+                <div className={style.GroupInput}>
+                  <div className={style.FormLeft}>
+                    <Input
+                      type="text"
+                      name="tenantsAddress"
+                      value={tenant.tenantsAddress}
+                      label="Current Address"
+                      placeholder="Write the address where you reside"
                       onChange={(e) => handleNewTenant(e)}
-                      error={errors.documentType}
-                    >
-                      <option value="">Select Document Type</option>
-                      {documentType.map((c) => (
-                        <option key={c}>{c}</option>
-                      ))}
-                    </select>
+                      error={errors.tenantsAddress}
+                    />
                   </div>
-                  <Input
-                    type="text"
-                    name="documentNumber"
-                    value={tenant.documentNumber}
-                    label="Document Number"
-                    placeholder="Write the number of your document"
-                    onChange={(e) => handleNewTenant(e)}
-                    error={errors.documentNumber}
-                  />
 
-                  <InputFile
-                    type="file"
-                    name="DF"
-                    label="DNI/NIE (Front)"
-                    placeholder="XXXXX"
-                    onChange={changeHandler}
-                    required
-                  />
-                  <InputFile
-                    type="file"
-                    name="DB"
-                    label="DNI/NIE (Back)"
-                    placeholder="XXXXX"
-                    onChange={changeHandler}
-                    required
-                  />
+                  <div className={style.FormLeft}>
+                    <Input
+                      type="number"
+                      name="tenantsZipCode"
+                      value={tenant.tenantsZipCode}
+                      label="Current zip code"
+                      placeholder="XXXXX"
+                      onChange={(e) => handleNewTenant(e)}
+                      error={errors.tenantsZipCode}
+                    />
+                  </div>
+                </div>
+                <div className={style.GroupInput}>
+                  <div className={style.FormLeft}>
+                    <div className={styles.selectContainer}>
+                      <label
+                        className={styles.selectLabel}
+                        htmlFor="documentType"
+                      >
+                        Document Type
+                      </label>
+                      <select
+                        required
+                        name="documentType"
+                        className={styles.selectInput}
+                        value={tenant.documentType}
+                        onChange={(e) => handleNewTenant(e)}
+                        error={errors.documentType}
+                      >
+                        <option value="">Select Document Type</option>
+                        {documentType.map((c) => (
+                          <option key={c}>{c}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className={style.FormLeft}>
+                    <Input
+                      type="text"
+                      name="documentNumber"
+                      value={tenant.documentNumber}
+                      label="Document Number"
+                      placeholder="Write the number of your document"
+                      onChange={(e) => handleNewTenant(e)}
+                      error={errors.documentNumber}
+                    />
+                  </div>
+                </div>
+                <div className={style.GroupInput}>
+                  <div className={style.FormLeft}>
+                    <InputFile
+                      type="file"
+                      name="DF"
+                      label="DNI/NIE (Front)"
+                      placeholder="XXXXX"
+                      onChange={changeHandler}
+                      required
+                    />
+                  </div>
+                  <div className={style.FormLeft}>
+                    <InputFile
+                      type="file"
+                      name="DB"
+                      label="DNI/NIE (Back)"
+                      placeholder="XXXXX"
+                      onChange={changeHandler}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={style.GroupInputAlone}>
                   <InputFile
                     type="file"
                     name="DCA"
@@ -415,10 +435,6 @@ const RegisterTenant = () => {
                     required
                   />
                 </div>
-              </div>
-              <div className={styles.FormIntern}>
-                <div className={styles.FormLeft}></div>
-                <div className={styles.FormRight}></div>
               </div>
 
               <div className={styles.TermsContainer}>
