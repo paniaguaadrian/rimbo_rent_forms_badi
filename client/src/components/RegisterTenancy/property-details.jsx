@@ -21,6 +21,10 @@ import Loader from "react-loader-spinner";
 // nanoid
 import { nanoid } from "nanoid";
 
+// Multi language
+import { withNamespaces } from "react-i18next";
+import i18n from "../../i18n";
+
 // End-Points env
 const {
   REACT_APP_BASE_URL,
@@ -28,9 +32,17 @@ const {
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
 
-const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
+const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [errors, setErrors] = useState({});
   const [isProcessing, setProcessingTo] = useState(false);
+
+  // Language
+  console.log(i18n);
+  if (i18n.language === "en") {
+    console.log("Esto es ingles");
+  } else {
+    console.log("Esto es espa;ol");
+  }
 
   // Handle on change
   const handleAgency = ({ target }) => {
@@ -101,6 +113,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
   };
 
   // Values for Select input
+
   const services = ["Administración", "Gestión", "Protección"];
 
   return (
@@ -109,7 +122,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
         <div className={styles.FormLeft}>
           <div className={styles.selectContainer}>
             <label className={styles.selectLabel} htmlFor="product">
-              Choose service
+              {t("RJ1.stepTwo.service")}
             </label>
             <select
               required
@@ -119,7 +132,16 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
               onChange={(e) => handleAgency(e)}
               error={errors.product}
             >
-              <option value="">Select Rimbo Service</option>
+              <option value="">{t("RJ1.stepTwo.servicePL")}</option>
+              {/* <option name="product" value={t("RJ1.stepTwo.servicesOne")}>
+                {t("RJ1.stepTwo.servicesOne")}
+              </option>
+              <option name="product" value={t("RJ1.stepTwo.servicesTwo")}>
+                {t("RJ1.stepTwo.servicesTwo")}
+              </option>
+              <option name="product" value={t("RJ1.stepTwo.servicesThree")}>
+                {t("RJ1.stepTwo.servicesThree")}
+              </option> */}
               {services.map((c) => (
                 <option key={c}>{c}</option>
               ))}
@@ -130,8 +152,8 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentDuration"
             value={tenancy.propertyDetails.rentDuration}
-            label="Duration rental agreement (years)"
-            placeholder="Enter duration"
+            label={t("RJ1.stepTwo.rentDuration")}
+            placeholder={t("RJ1.stepTwo.rentDurationPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.rentDuration}
           />
@@ -139,8 +161,8 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentAmount"
             value={tenancy.propertyDetails.rentAmount}
-            label="Monthly rent (in €)"
-            placeholder="Enter rent"
+            label={t("RJ1.stepTwo.rentAmount")}
+            placeholder={t("RJ1.stepTwo.rentAmountPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.rentAmount}
           />
@@ -150,8 +172,8 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentalAddress"
             value={tenancy.propertyDetails.rentalAddress}
-            label="Address of the property"
-            placeholder="Enter address"
+            label={t("RJ1.stepTwo.rentalAddress")}
+            placeholder={t("RJ1.stepTwo.rentalAddressPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.rentalAddress}
           />
@@ -159,8 +181,8 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentalCity"
             value={tenancy.propertyDetails.rentalCity}
-            label="City"
-            placeholder="Enter the city name"
+            label={t("RJ1.stepTwo.rentalCity")}
+            placeholder={t("RJ1.stepTwo.rentalCityPL")}
             onChange={(e) => handleAgency(e)}
             error={errors.rentalCity}
           />
@@ -168,8 +190,8 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentalPostalCode"
             value={tenancy.propertyDetails.rentalPostalCode}
-            label="Postal code"
-            placeholder="XXXXX"
+            label={t("RJ1.stepTwo.rentalPostalCode")}
+            placeholder={t("RJ1.stepTwo.rentalPostalCodePL")}
             onChange={(e) => handleAgency(e)}
             error={errors.rentalPostalCode}
           />
@@ -187,8 +209,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
           error={errors.isAgentAccepted}
         />
         <p>
-          By submitting this form, you understand and accept that we use your
-          information in accordance with our{" "}
+          {t("RJ1.stepTwo.pp1")}{" "}
           <a
             href="https://rimbo.rent/en/privacy-policy/"
             target="_blank"
@@ -196,9 +217,9 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             className="link-tag"
           >
             {" "}
-            privacy policy
+            {t("RJ1.stepTwo.pp2")}
           </a>{" "}
-          and{" "}
+          {t("RJ1.stepTwo.pp3")}{" "}
           <a
             href="https://rimbo.rent/en/cookies-policy/"
             target="_blank"
@@ -206,7 +227,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             className="link-tag"
           >
             {" "}
-            cookies policy
+            {t("RJ1.stepTwo.pp4")}
           </a>
           .
         </p>
@@ -214,7 +235,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
 
       <div className={styles.ButtonContainer}>
         <Button onClick={() => setStep(step - 1)} type="button">
-          Previous Step
+          {t("prevStepButton")}
         </Button>
         {isProcessing ? (
           <Loader
@@ -226,7 +247,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
           />
         ) : (
           <Button disabled={isProcessing} type="submit">
-            Submit
+            {t("submitButton")}
           </Button>
         )}
       </div>
@@ -241,4 +262,4 @@ PropertyDetails.propTypes = {
   setTenancy: PropTypes.func,
 };
 
-export default PropertyDetails;
+export default withNamespaces()(PropertyDetails);

@@ -63,7 +63,7 @@
   margin-top: 1rem;
   margin-left: 0.6rem;
   @include xl {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-left: 0.6rem;
   }
   .InputError {
@@ -73,9 +73,9 @@
     margin-top: 2rem;
     @include xl {
       color: $danger;
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
   }
 }

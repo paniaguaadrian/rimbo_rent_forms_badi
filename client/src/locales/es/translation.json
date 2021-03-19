@@ -1,4 +1,12 @@
 {
+  "nextStepButton": "Siguiente",
+  "prevStepButton": "Atrás",
+  "submitButton": "Enviar",
+  "Home": {
+    "title": "Bienvenid@ a la unión entre Rimbo y Badi",
+    "subtitle": "Si eres un agente, ponte en contacto con...",
+    "subtext": "Si quieres saber más de.... haz lo siguiente..."
+  },
   "RJ1": {
     "header": {
       "title": "Registra a tu inquilino para su evaluación",
@@ -18,7 +26,37 @@
     "stepOne": {
       "tenantName": "Nombre completo del inquilino",
       "tenantEmail": "Correo electrónico del inquilino",
-      "tenantsPhone": "Número de teléfono del inquilino"
+      "tenantPhone": "Número de teléfono del inquilino",
+      "tenantNamePL": "Escribe el nombre completo",
+      "tenantEmailPL": "Escribe el correo electrónico",
+      "tenantPhonePL": "Escribe el número de teléfono"
+    },
+    "stepTwo": {
+      "service": "Servicio escogido",
+      "servicePL": "Escoge un servicio",
+      "rentDuration": "Duración el contrato de alquiler (años)",
+      "rentDurationPL": "Escribe la duración",
+      "rentAmount": "Alquiler mensual (en €)",
+      "rentAmountPL": "Escribe el alquiler",
+      "rentalAddress": "Dirección del inmueble",
+      "rentalAddressPL": "Escribe la dirección",
+      "rentalCity": "Población del inmueble",
+      "rentalCityPL": "Escribe la ciudad",
+      "rentalPostalCode": "Código postal del inmueble",
+      "rentalPostalCodePL": "Escribe el código postal",
+      "pp1": " Al enviar este formulario, comprendes y aceptas que utilizamos tu información de acuerdo con nuestra",
+      "pp2": "política de privacidad",
+      "pp3": "y nuestra",
+      "pp4": "política de cookies"
+    },
+    "completed": {
+      "title": "Saludos ",
+      "titleTwo": " de ",
+      "subtitle": "Has registrado correctamente los datos de",
+      "subtitleTwo": " como nuevo inquilino en Rimbo",
+      "subtext": "Acabamos de enviarte un correo a ",
+      "subtextTwo": "con toda la información y siguientes pasos para ti",
+      "regards": "Un cordial saludo"
     }
   }
 }

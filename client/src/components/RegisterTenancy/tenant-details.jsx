@@ -47,7 +47,7 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
             name="tenantName"
             value={tenancy.tenantDetails.tenantName}
             label={t("RJ1.stepOne.tenantName")}
-            placeholder="Enter name and surname"
+            placeholder={t("RJ1.stepOne.tenantNamePL")}
             onChange={(e) => handleTenant(e)}
             error={errors.tenantName}
           />
@@ -56,7 +56,7 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
             name="tenantEmail"
             value={tenancy.tenantDetails.tenantEmail}
             label={t("RJ1.stepOne.tenantEmail")}
-            placeholder="Enter a valid email address"
+            placeholder={t("RJ1.stepOne.tenantEmailPL")}
             onChange={(e) => handleTenant(e)}
             error={errors.tenantEmail}
           />
@@ -66,8 +66,8 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
             type="text"
             name="tenantPhone"
             value={tenancy.tenantDetails.tenantPhone}
-            label={t("RJ1.stepOne.tenantsPhone")}
-            placeholder="Enter phone number"
+            label={t("RJ1.stepOne.tenantPhone")}
+            placeholder={t("RJ1.stepOne.tenantPhonePL")}
             onChange={(e) => handleTenant(e)}
             error={errors.tenantPhone}
           />
@@ -76,9 +76,9 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
 
       <div className={styles.ButtonContainer}>
         <Button onClick={() => setStep(step - 1)} type="button">
-          Previous Step
+          {t("prevStepButton")}
         </Button>
-        <Button type="submit">Next Step</Button>
+        <Button type="submit">{t("nextStepButton")}</Button>
       </div>
     </form>
   );

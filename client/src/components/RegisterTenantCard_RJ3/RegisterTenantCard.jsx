@@ -209,8 +209,7 @@ const RegisterTenantCard = () => {
                     the charge authorization
                   </h2>
                   <div>
-                    {tenancyData.product === "Administración" ||
-                    tenancyData.product === "Administration" ? (
+                    {tenancyData.product === "Administración" ? (
                       <p>
                         * The card will NOT be blocked. The card will NOT be
                         charged now. Only in case of legal claims presented by

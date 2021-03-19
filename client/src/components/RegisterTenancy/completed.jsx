@@ -5,29 +5,32 @@ import PropTypes from "prop-types";
 // Imported Styles
 import styles from "../RegisterTenancy/register-user.module.scss";
 
-const Completed = ({ tenancy }) => {
+// Multi language
+import { withNamespaces } from "react-i18next";
+
+const Completed = ({ tenancy, t }) => {
   return (
     <div className={styles.CompleteContainer}>
       <div className={styles.CompleteText}>
         <h1>
-          Warm welcome {""}
+          {t("RJ1.completed.title")} {""}
           <b>
             {""}
             {`${tenancy.agencyContactPerson}`}
             {""}
           </b>
-          {""} from <b> {`${tenancy.agencyName}`}</b>
+          {""} {t("RJ1.completed.titleTwo")} <b> {`${tenancy.agencyName}`}</b>
         </h1>
         <h3>
-          You have successfully registered{" "}
-          <b>{`${tenancy.tenantDetails.tenantName}`}</b> as a new Tenant with
-          Rimbo
+          {t("RJ1.completed.subtitle")}{" "}
+          <b>{`${tenancy.tenantDetails.tenantName}`}</b>{" "}
+          {t("RJ1.completed.subtitleTwo")}
         </h3>
         <p>
-          We just sent you an email to <b>{`${tenancy.agencyEmailPerson}`}</b>{" "}
-          with all the information and next instructions for you
+          {t("RJ1.completed.subtext")} <b>{`${tenancy.agencyEmailPerson}`}</b>{" "}
+          {t("RJ1.completed.subtextTwo")}
         </p>
-        <h3>Best regards</h3>
+        <h3>{t("RJ1.completed.regards")}</h3>
       </div>
     </div>
   );
@@ -37,4 +40,4 @@ Completed.propTypes = {
   tenancy: PropTypes.object,
 };
 
-export default Completed;
+export default withNamespaces()(Completed);

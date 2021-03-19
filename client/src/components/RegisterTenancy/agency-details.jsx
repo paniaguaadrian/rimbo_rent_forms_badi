@@ -84,7 +84,7 @@ const AgencyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
       </div>
 
       <div className={styles.AloneButtonContainer}>
-        <Button type="submit">Next Step</Button>
+        <Button type="submit">{t("nextStepButton")}</Button>
       </div>
     </form>
   );
