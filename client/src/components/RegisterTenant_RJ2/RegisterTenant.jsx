@@ -135,7 +135,7 @@ const RegisterTenant = () => {
         documentNumber: tenant.documentNumber,
         tenantsAddress: tenant.tenantsAddress,
         tenantsZipCode: tenant.tenantsZipCode,
-        isAcceptedPrivacy: tenant.isAcceptedPrivacy,
+        isAcceptedGC: tenant.isAcceptedGC,
         randomID: tenancyID,
       }
     );
@@ -482,12 +482,12 @@ const RegisterTenant = () => {
                 <InputCheck
                   type="checkbox"
                   required
-                  name="isAcceptedPrivacy"
+                  name="isAcceptedGC"
                   id="terms"
-                  value={tenant.isAcceptedPrivacy}
+                  value={tenant.isAcceptedGC}
                   placeholder="Accept our terms and conditions"
                   onChange={(e) => handleNewTenant(e)}
-                  error={errors.isAcceptedPrivacy}
+                  error={errors.isAcceptedGC}
                 />
                 <p>
                   By submitting this form, you understand and agree that we use

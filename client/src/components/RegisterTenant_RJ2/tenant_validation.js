@@ -24,8 +24,8 @@ export const newTenant = (values) => {
     errors.tenantsZipCode = "You must specify a valid zip code";
   }
 
-  if (!values.isAcceptedPrivacy) {
-    errors.isAcceptedPrivacy = "You must accept our Privacy Policy";
+  if (!values.isAcceptedGC) {
+    errors.isAcceptedGC = "You must accept our Privacy Policy";
   }
   return errors;
 };

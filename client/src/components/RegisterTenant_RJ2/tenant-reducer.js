@@ -7,7 +7,7 @@ export const DefaultTenant = {
   documentNumber: "",
   tenantsAddress: "",
   tenantsZipCode: "",
-  isAcceptedPrivacy: true,
+  isAcceptedGC: true,
 };
 
 export const TenantReducer = (newTenant, { type, payload }) => {
