@@ -23,7 +23,7 @@ import Button from "../Button";
 import Loader from "react-loader-spinner";
 
 // Multi language
-// import { withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
 
 // End-Points env
@@ -34,7 +34,7 @@ const {
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
 
-const RegisterTenant = () => {
+const RegisterTenant = ({ t }) => {
   let { tenancyID } = useParams();
   const randomID = tenancyID;
 
@@ -57,7 +57,6 @@ const RegisterTenant = () => {
   useEffect(
     () => {
       const getData = () => {
-        // ! anadir :tenancyID
         fetch(
           `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
         )
@@ -116,7 +115,6 @@ const RegisterTenant = () => {
     setProcessingTo(true);
 
     // ! Post to Rimbo API (files/images)
-    // ! anadir :randomID/upload
     await axios.post(
       `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/upload`,
       formData,
@@ -124,7 +122,6 @@ const RegisterTenant = () => {
     );
 
     // ! Post to Rimbo API Data
-    // ! anadir :randomID
     await axios.post(
       `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}`,
       {
@@ -285,16 +282,16 @@ const RegisterTenant = () => {
     sendAttachments();
   }, [responseDataAfter]); //eslint-disable-line
 
-  const documentType = ["DNI", "NIE", "Passport", "Other"];
-  const jobType = [
-    "Salaried",
-    "Autonomous",
-    "Unemployed",
-    "We are a company",
-    "I'm retired",
-    "I am a student",
-    "Other",
-  ];
+  // const documentType = ["DNI", "NIE", "Passport", "Other"];
+  // const jobType = [
+  //   "Salaried",
+  //   "Autonomous",
+  //   "Unemployed",
+  //   "We are a company",
+  //   "I'm retired",
+  //   "I am a student",
+  //   "Other",
+  // ];
 
   return (
     <>
@@ -310,27 +307,18 @@ const RegisterTenant = () => {
 
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-        <title>New Tenant - Rimbo - The new way to rent</title>
+        <title>{t("RJ2.header")}</title>
       </Helmet>
       {!isSuccessfullySubmitted ? (
         <div className={styles.RegisterContainer}>
           <div className={styles.Register}>
             <h1>
-              Tell us a little more about yourself to save
-              <br /> the deposit of your next apartment
+              {t("RJ2.titleOne")}
+              <br /> {t("RJ2.titleTwo")}
             </h1>
             <div className={styles.ExtraInfoContainer}>
-              <h2>
-                All we need from you is the following information. Quick and
-                easy!
-              </h2>
-              <p>
-                We will need a scanned copy of your DNI / NIE (front and back)
-                or passport and a document that confirms your current address.
-                If you are an EU citizen, please provide your NIE number in the
-                “Document number” field and send us a scanned copy of the
-                identity document of your country of origin.
-              </p>
+              <h2>{t("RJ2.subtitle")}</h2>
+              <p>{t("RJ2.warning")}</p>
             </div>
           </div>
           <div className={style.FormContent}>
@@ -346,8 +334,8 @@ const RegisterTenant = () => {
                       type="number"
                       name="monthlyNetIncome"
                       value={tenant.monthlyNetIncome}
-                      label="Monthly net income"
-                      placeholder="Write your income"
+                      label={t("RJ2.monthlyNetIncome")}
+                      placeholder={t("RJ2.monthlyNetIncomePL")}
                       onChange={(e) => handleNewTenant(e)}
                       error={errors.monthlyNetIncome}
                     />
@@ -355,7 +343,7 @@ const RegisterTenant = () => {
                   <div className={style.FormLeft}>
                     <div className={styles.selectContainer}>
                       <label className={styles.selectLabel} htmlFor="jobType">
-                        Job Type
+                        {t("RJ2.jobType")}
                       </label>
                       <select
                         required
@@ -365,10 +353,39 @@ const RegisterTenant = () => {
                         onChange={(e) => handleNewTenant(e)}
                         error={errors.jobType}
                       >
-                        <option value="">Select your job type</option>
-                        {jobType.map((c) => (
+                        <option value="">{t("RJ2.jobTypePL")}</option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeOne")}>
+                          {t("RJ2.jobTypeOne")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeTwo")}>
+                          {t("RJ2.jobTypeTwo")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeThree")}>
+                          {t("RJ2.jobTypeThree")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeFour")}>
+                          {t("RJ2.jobTypeFour")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeFive")}>
+                          {t("RJ2.jobTypeFive")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeSix")}>
+                          {t("RJ2.jobTypeSix")}
+                        </option>
+
+                        <option name="jobType" value={t("RJ2.jobTypeSeven")}>
+                          {t("RJ2.jobTypeSeven")}
+                        </option>
+
+                        {/* {jobType.map((c) => (
                           <option key={c}>{c}</option>
-                        ))}
+                        ))} */}
                       </select>
                     </div>
                   </div>
@@ -379,8 +396,8 @@ const RegisterTenant = () => {
                       type="text"
                       name="tenantsAddress"
                       value={tenant.tenantsAddress}
-                      label="Current Address"
-                      placeholder="Write the address where you reside"
+                      label={t("RJ2.tenantsAddress")}
+                      placeholder={t("RJ2.tenantsAddressPL")}
                       onChange={(e) => handleNewTenant(e)}
                       error={errors.tenantsAddress}
                     />
@@ -391,8 +408,8 @@ const RegisterTenant = () => {
                       type="number"
                       name="tenantsZipCode"
                       value={tenant.tenantsZipCode}
-                      label="Current zip code"
-                      placeholder="XXXXX"
+                      label={t("RJ2.tenantsZipCode")}
+                      placeholder={t("RJ2.tenantsZipCodePL")}
                       onChange={(e) => handleNewTenant(e)}
                       error={errors.tenantsZipCode}
                     />
@@ -405,7 +422,7 @@ const RegisterTenant = () => {
                         className={styles.selectLabel}
                         htmlFor="documentType"
                       >
-                        Document Type
+                        {t("RJ2.documentType")}
                       </label>
                       <select
                         required
@@ -415,10 +432,39 @@ const RegisterTenant = () => {
                         onChange={(e) => handleNewTenant(e)}
                         error={errors.documentType}
                       >
-                        <option value="">Select Document Type</option>
-                        {documentType.map((c) => (
+                        <option value="">{t("RJ2.documentTypePL")}</option>
+
+                        <option
+                          name="documentType"
+                          value={t("RJ2.documentTypeOne")}
+                        >
+                          {t("RJ2.documentTypeOne")}
+                        </option>
+
+                        <option
+                          name="documentType"
+                          value={t("RJ2.documentTypeTwo")}
+                        >
+                          {t("RJ2.documentTypeTwo")}
+                        </option>
+
+                        <option
+                          name="documentType"
+                          value={t("RJ2.documentTypeThree")}
+                        >
+                          {t("RJ2.documentTypeThree")}
+                        </option>
+
+                        <option
+                          name="documentType"
+                          value={t("RJ2.documentTypeFour")}
+                        >
+                          {t("RJ2.documentTypeFour")}
+                        </option>
+
+                        {/* {documentType.map((c) => (
                           <option key={c}>{c}</option>
-                        ))}
+                        ))} */}
                       </select>
                     </div>
                   </div>
@@ -427,8 +473,8 @@ const RegisterTenant = () => {
                       type="text"
                       name="documentNumber"
                       value={tenant.documentNumber}
-                      label="Document Number"
-                      placeholder="Write the number of your document"
+                      label={t("RJ2.documentNumber")}
+                      placeholder={t("RJ2.documentNumberPL")}
                       onChange={(e) => handleNewTenant(e)}
                       error={errors.documentNumber}
                     />
@@ -439,7 +485,7 @@ const RegisterTenant = () => {
                     <InputFile
                       type="file"
                       name="DF"
-                      label="DNI/NIE (Front)"
+                      label={t("RJ2.DF")}
                       placeholder="XXXXX"
                       onChange={changeHandler}
                       required
@@ -449,7 +495,7 @@ const RegisterTenant = () => {
                     <InputFile
                       type="file"
                       name="DB"
-                      label="DNI/NIE (Back)"
+                      label={t("RJ2.DB")}
                       placeholder="XXXXX"
                       onChange={changeHandler}
                       required
@@ -461,7 +507,7 @@ const RegisterTenant = () => {
                     <InputFile
                       type="file"
                       name="LP"
-                      label="Last salary payslip"
+                      label={t("RJ2.LP")}
                       onChange={changeHandler}
                       required
                     />
@@ -470,7 +516,7 @@ const RegisterTenant = () => {
                     <InputFile
                       type="file"
                       name="PP"
-                      label="Previous salary payslip"
+                      label={t("RJ2.PP")}
                       onChange={changeHandler}
                       required
                     />
@@ -490,8 +536,7 @@ const RegisterTenant = () => {
                   error={errors.isAcceptedGC}
                 />
                 <p>
-                  By submitting this form, you understand and agree that we use
-                  your information in accordance with our{" "}
+                  {t("RJ2.checkboxOne")}{" "}
                   <a
                     href="https://rimbo.rent/en/privacy-policy/"
                     target="_blank"
@@ -499,9 +544,9 @@ const RegisterTenant = () => {
                     className="link-tag"
                   >
                     {" "}
-                    privacy policy{" "}
+                    {t("RJ2.checkboxTwo")}{" "}
                   </a>{" "}
-                  and our{" "}
+                  {t("RJ2.checkboxThree")}{" "}
                   <a
                     href="https://rimbo.rent/en/cookies-policy/"
                     target="_blank"
@@ -509,9 +554,9 @@ const RegisterTenant = () => {
                     className="link-tag"
                   >
                     {" "}
-                    cookies policy{" "}
+                    {t("RJ2.checkboxFour")}{" "}
                   </a>
-                  to offer you Rimbo services.
+                  {t("RJ2.checkboxFive")}
                 </p>
               </div>
               <div className={styles.ButtonContainer}>
@@ -525,7 +570,7 @@ const RegisterTenant = () => {
                   />
                 ) : (
                   <Button disabled={isProcessing} type="submit">
-                    Submit
+                    {t("submitButton")}
                   </Button>
                 )}
               </div>
@@ -535,13 +580,14 @@ const RegisterTenant = () => {
       ) : (
         <div className={styles.CompleteContainer}>
           <div className={styles.CompleteText}>
-            <h1>The form has been completed successfully</h1>
-            <h3>All data has been successfully completed</h3>
+            <h1>{t("RJ2.completedTitle")}</h1>
+            <h3>{t("RJ2.completedSubtitle")}</h3>
             <p>
-              Thanks for your time <b>{responseData.tenant.tenantsName}</b>, We
-              will contact you shortly to give you more details of the process.
+              {t("RJ2.completeSubtextOne")}
+              <b>{responseData.tenant.tenantsName}</b>,{" "}
+              {t("RJ2.completeSubtextTwo")}
             </p>
-            <h3>Best regards</h3>
+            <h3>{t("RJ2.completeRegards")}</h3>
           </div>
         </div>
       )}
@@ -549,4 +595,4 @@ const RegisterTenant = () => {
   );
 };
 
-export default RegisterTenant;
+export default withNamespaces()(RegisterTenant);

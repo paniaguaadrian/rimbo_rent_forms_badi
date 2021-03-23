@@ -14,7 +14,7 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { UPDATE_NEWTENANT_INFO } from "./tenantStripe-constants";
 
 // Multi language
-// import { withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
 
 // Styles
@@ -49,7 +49,7 @@ const {
   REACT_APP_API_RIMBO_TENANT_STRIPE,
 } = process.env;
 
-const RegisterTenantCard = () => {
+const RegisterTenantCard = ({ t }) => {
   let { randomID } = useParams();
   const tenancyID = randomID;
 
@@ -201,7 +201,7 @@ const RegisterTenantCard = () => {
 
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-        <title>New Tenant - Rimbo - The new way to rent</title>
+        <title>{t("RJ3.header")}</title>
       </Helmet>
       {!isSuccessfullySubmitted ? (
         <div className={styles.RegisterContainer}>
@@ -218,29 +218,19 @@ const RegisterTenantCard = () => {
           ) : (
             <>
               <div className={styles.Register}>
-                <h1>
-                  Great! You are just one step away from renting without a
-                  deposit!
-                </h1>
+                <h1>{t("RJ3.title")}</h1>
                 <div className={styles.ExtraInfoContainer}>
-                  <h2>
-                    You just need to review our Terms and Conditions and provide
-                    the charge authorization
-                  </h2>
+                  <h2>{t("RJ3.subtitle")}</h2>
                   <div>
                     {tenancyData.product === "Administración" ? (
                       <p>
-                        * The card will NOT be blocked. The card will NOT be
-                        charged now. Only in case of legal claims presented by
-                        the landlord the card will be charged, import limited to{" "}
-                        <span>1 month of rent.</span>
+                        {t("RJ3.warningOne")}
+                        <span> {t("RJ3.warningTwo")}</span>
                       </p>
                     ) : (
                       <p>
-                        * The card will NOT be blocked. The card will NOT be
-                        charged now. Only in case of legal claims presented by
-                        the landlord the card will be charged, import limited to{" "}
-                        <span>2 months of rent.</span>
+                        {t("RJ3.warningOne")}{" "}
+                        <span>{t("RJ3.warningThree")}</span>
                       </p>
                     )}
                   </div>
@@ -250,7 +240,7 @@ const RegisterTenantCard = () => {
                 <form onSubmit={handleFormSubmit}>
                   <div className={styles.CardInput}>
                     <label>
-                      <h3>Debit card details</h3>
+                      <h3>{t("RJ3.cardTitle")}</h3>
                       <div>
                         <p id="name">{tenancyData.tenant.tenantsName}</p>
                         <p id="email">{tenancyData.tenant.tenantsEmail}</p>
@@ -277,7 +267,7 @@ const RegisterTenantCard = () => {
                       onChange={(e) => handleNewTenant(e)}
                     />
                     <p>
-                      By hiring Rimbo's Services, you accept the{" "}
+                      {t("RJ3.isAcceptedOne")}{" "}
                       <a
                         href="https://rimbo.rent/politica-privacidad/"
                         target="_blank"
@@ -285,7 +275,7 @@ const RegisterTenantCard = () => {
                         className="link-tag"
                       >
                         {" "}
-                        Rimbo general conditions
+                        {t("RJ3.isAcceptedTwo")}
                       </a>
                     </p>
                   </div>
@@ -300,7 +290,7 @@ const RegisterTenantCard = () => {
                     />
                   ) : (
                     <button disabled={isProcessing || !stripe}>
-                      Authorize
+                      {t("RJ3.authorize")}
                     </button>
                   )}
                 </form>
@@ -311,11 +301,12 @@ const RegisterTenantCard = () => {
       ) : (
         <div className={styles.CompleteContainer}>
           <div className={styles.CompleteText}>
-            <h1>Your payment has been successfully completed</h1>
-            <h3>You will shortly receive an email with more details.</h3>
+            <h1>{t("RJ3.completedTitle")}</h1>
+            <h3>{t("RJ3.completedSubtitle")}</h3>
             <p>
-              Thanks for your time <b>{tenancyData.tenant.tenantsName}</b>, We
-              will contact you shortly to give you more details of the process.
+              {t("RJ3.completeSubtextOne")}
+              <b>{tenancyData.tenant.tenantsName}</b>,{" "}
+              {t("RJ3.completeSubtextTwo")}
             </p>
           </div>
         </div>
@@ -324,4 +315,4 @@ const RegisterTenantCard = () => {
   );
 };
 
-export default RegisterTenantCard;
+export default withNamespaces()(RegisterTenantCard);

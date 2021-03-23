@@ -10,7 +10,7 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_card-reducer";
 import styles from "../approvedTenantRimbo/approved-user.module.scss";
 
 // Multi language
-// import { withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
 
 // End-Points env
@@ -21,7 +21,7 @@ const {
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
 
-const ApprovedTenantCardRimbo = () => {
+const ApprovedTenantCardRimbo = ({ t }) => {
   let { tenancyID } = useParams();
   const randomID = tenancyID;
 
@@ -101,17 +101,17 @@ const ApprovedTenantCardRimbo = () => {
 
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-        <title>Approved - Rimbo - The new way to rent</title>
+        <title>{t("success.header")}</title>
       </Helmet>
       <div className={styles.SuccessPageContainer}>
         <div className={styles.SuccessPageText}>
-          <h1>The tenant has been accepted after the debit card request.</h1>
-          <h2>You have successfully accepted the tenant</h2>
-          <p>The PM and the Tenant will receive a confirmation email.</p>
+          <h1>{t("success.tenantCardTitle")}</h1>
+          <h2>{t("success.tenantCardSubtitle")}</h2>
+          <p>{t("success.tenantCardP")}</p>
         </div>
       </div>
     </>
   );
 };
 
-export default ApprovedTenantCardRimbo;
+export default withNamespaces()(ApprovedTenantCardRimbo);

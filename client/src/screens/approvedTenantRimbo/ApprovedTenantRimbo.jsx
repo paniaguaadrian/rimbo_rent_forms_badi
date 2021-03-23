@@ -10,7 +10,7 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_rimbo-reducer";
 import styles from "./approved-user.module.scss";
 
 // Multi language
-// import { withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
 
 // End-Points env
@@ -21,7 +21,7 @@ const {
   REACT_APP_API_RIMBO_TENANT,
 } = process.env;
 
-const ApprovedTenantRimbo = () => {
+const ApprovedTenantRimbo = ({ t }) => {
   let { tenancyID } = useParams();
   const randomID = tenancyID;
   const [tenant] = useReducer(TenantReducer, DefaultTenant);
@@ -132,23 +132,22 @@ const ApprovedTenantRimbo = () => {
 
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-        <title>Approved- Rimbo - The new way to rent</title>
+        <title>{t("success.header")}</title>
       </Helmet>
       <div className={styles.SuccessPageContainer}>
         <div className={styles.SuccessPageText}>
-          <h1>The tenant has been accepted</h1>
-          <h2>You have successfully accepted the tenant</h2>
+          <h1>{t("success.tenantTitle")}</h1>
+          <h2>{t("success.tenantSubtitle")}</h2>
           <p>
-            The tenant <b>{responseData.tenantsName}</b> is accepted
+            {t("success.tenantPOne")}
+            <b>{responseData.tenantsName}</b>
+            {t("success.tenantPTwo")}
           </p>
-          <p>
-            Both you and the tenant will receive an email with the details of
-            the process
-          </p>
+          <p>{t("success.tenantPThree")}</p>
         </div>
       </div>
     </>
   );
 };
 
-export default ApprovedTenantRimbo;
+export default withNamespaces()(ApprovedTenantRimbo);

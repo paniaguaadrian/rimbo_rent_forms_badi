@@ -19,7 +19,7 @@ import Button from "../Button";
 import Loader from "react-loader-spinner";
 
 // Multi language
-// import { withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 import i18n from "../../i18n";
 
 // End-Points env
@@ -30,7 +30,7 @@ const {
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
 
-const RegisterTenantPM = () => {
+const RegisterTenantPM = ({ t }) => {
   const { tenancyID } = useParams();
 
   const [tenant, setTenant] = useReducer(TenantReducer, DefaultTenant);
@@ -179,21 +179,15 @@ const RegisterTenantPM = () => {
 
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-        <title>Landlord Details - Rimbo - The new way to rent</title>
+        <title>{t("RJS.header")}</title>
       </Helmet>
       {!isSuccessfullySubmitted ? (
         <div className={styles.RegisterContainer}>
           <div className={styles.Register}>
-            <h1>
-              Horray! The rental is now covered by Rimbo! Your tenants can move
-              in now!
-            </h1>
+            <h1>{t("RJS.title")}</h1>
+            <h1>{t("RJS.titleTwo")}</h1>
             <div className={styles.ExtraInfoContainer}>
-              {/* <h2>
-                All we need from you is the following information. Quick and
-                easy!
-              </h2> */}
-              <p>Confirm the rental start date and upload the Rimbo Annex.</p>
+              <p>{t("RJS.warningOne")}</p>
             </div>
           </div>
           <div className={styles.FormContent}>
@@ -208,8 +202,8 @@ const RegisterTenantPM = () => {
                     type="text"
                     name="landlordName"
                     value={tenant.landlordName}
-                    label="Landlord full name"
-                    placeholder="Enter name and surname"
+                    label={t("RJS.landlordName")}
+                    placeholder={t("RJS.landlordNamePL")}
                     onChange={(e) => handleNewTenant(e)}
                     required
                     // error={errors.landlordName}
@@ -218,8 +212,8 @@ const RegisterTenantPM = () => {
                     type="email"
                     name="landlordEmail"
                     value={tenant.landlordEmail}
-                    label="Landlord email"
-                    placeholder="Enter a valid email address"
+                    label={t("RJS.landlordEmail")}
+                    placeholder={t("RJS.landlordEmailPL")}
                     onChange={(e) => handleNewTenant(e)}
                     required
                     // error={errors.landlordEmail}
@@ -228,8 +222,8 @@ const RegisterTenantPM = () => {
                     type="tel"
                     name="landlordPhone"
                     value={tenant.landlordPhone}
-                    label="Landlord phone number"
-                    placeholder="Enter phone number"
+                    label={t("RJS.landlordPhone")}
+                    placeholder={t("RJS.landlordPhonePL")}
                     onChange={(e) => handleNewTenant(e)}
                     required
                     // error={errors.landlordPhone}
@@ -240,15 +234,14 @@ const RegisterTenantPM = () => {
                     type="date"
                     name="date"
                     value={date}
-                    label="Rental start date"
-                    placeholder="Write your income"
+                    label={t("RJS.date")}
                     onChange={(e) => setDate(e.target.value)}
                     required
                   />
                   <InputFile
                     type="file"
                     name="File"
-                    label="Rental Agreement - Rimbo Annex"
+                    label={t("RJS.file")}
                     onChange={changeFilesHandler}
                     required
                   />
@@ -266,7 +259,7 @@ const RegisterTenantPM = () => {
                   />
                 ) : (
                   <Button disabled={isProcessing} type="submit">
-                    Send
+                    {t("submitButton")}
                   </Button>
                 )}
               </div>
@@ -276,11 +269,12 @@ const RegisterTenantPM = () => {
       ) : (
         <div className={styles.CompleteContainer}>
           <div className={styles.CompleteText}>
-            <h1>The form has been completed successfully</h1>
-            <h3>All data has been successfully completed</h3>
+            <h1>{t("RJS.completedTitle")}</h1>
+            <h3>{t("RJS.completedSubtitle")}</h3>
             <p>
-              Thanks for your time <b>{responseData.tenant.tenantsName}</b>, We
-              will contact you shortly to give you more details of the process.
+              {t("RJS.completeSubtextOne")}
+              <b>{responseData.tenant.tenantsName}</b>,{" "}
+              {t("RJS.completeSubtextTwo")}
             </p>
           </div>
         </div>
@@ -289,4 +283,4 @@ const RegisterTenantPM = () => {
   );
 };
 
-export default RegisterTenantPM;
+export default withNamespaces()(RegisterTenantPM);
