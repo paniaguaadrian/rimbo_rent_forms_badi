@@ -17,9 +17,10 @@ export const DefaultTenancy = {
     tenantEmail: "",
   },
   propertyDetails: {
-    rentalCity: "",
-    rentalPostalCode: "",
-    rentalAddress: "",
+    // rentalCity: "",
+    // rentalPostalCode: "",
+    // rentalAddress: "",
+    rentalAddressSecond: "",
     rentAmount: "",
     rentDuration: "",
     product: "",
