@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import Home from "./screens/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import WhatsappBubble from "./components/WhatsappBubble/WhatsappBubble";
 
 import RegisterTenancy from "./components/RegisterTenancy";
 import RegisterTenant from "./components/RegisterTenant_RJ2/RegisterTenant";
@@ -63,6 +64,9 @@ const App = () => {
         path="/register/rjs/:tenancyID/service-start"
         component={ApprovedTenancyRimbo}
       />
+
+      <WhatsappBubble />
+
       <Footer />
     </>
   );
