@@ -99,41 +99,41 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
     );
 
     // ! Post to Email service
-    // if (i18n.language === "en") {
-    //   await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj1`, {
-    //     tenantsName: tenancy.tenantDetails.tenantName,
-    //     tenantsEmail: tenancy.tenantDetails.tenantEmail,
-    //     tenantsPhone: tenancy.tenantDetails.tenantPhone,
-    //     agencyName: tenancy.agencyName,
-    //     agencyContactPerson: tenancy.agencyContactPerson,
-    //     agencyPhonePerson: tenancy.agencyPhonePerson,
-    //     agencyEmailPerson: tenancy.agencyEmailPerson,
-    //     rentDuration: tenancy.propertyDetails.rentDuration,
-    //     product: tenancy.propertyDetails.product,
-    //     rentAmount: tenancy.propertyDetails.rentAmount,
-    //     rentalAddress: tenancy.propertyDetails.rentalAddress,
-    //     rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
-    //     rentalCity: tenancy.propertyDetails.rentalCity,
-    //     randomID,
-    //   });
-    // } else {
-    //   await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
-    //     tenantsName: tenancy.tenantDetails.tenantName,
-    //     tenantsEmail: tenancy.tenantDetails.tenantEmail,
-    //     tenantsPhone: tenancy.tenantDetails.tenantPhone,
-    //     agencyName: tenancy.agencyName,
-    //     agencyContactPerson: tenancy.agencyContactPerson,
-    //     agencyPhonePerson: tenancy.agencyPhonePerson,
-    //     agencyEmailPerson: tenancy.agencyEmailPerson,
-    //     rentDuration: tenancy.propertyDetails.rentDuration,
-    //     product: tenancy.propertyDetails.product,
-    //     rentAmount: tenancy.propertyDetails.rentAmount,
-    //     rentalAddress: tenancy.propertyDetails.rentalAddress,
-    //     rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
-    //     rentalCity: tenancy.propertyDetails.rentalCity,
-    //     randomID,
-    //   });
-    // }
+    if (i18n.language === "en") {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/rj1`, {
+        tenantsName: tenancy.tenantDetails.tenantName,
+        tenantsEmail: tenancy.tenantDetails.tenantEmail,
+        tenantsPhone: tenancy.tenantDetails.tenantPhone,
+        agencyName: tenancy.agencyName,
+        agencyContactPerson: tenancy.agencyContactPerson,
+        agencyPhonePerson: tenancy.agencyPhonePerson,
+        agencyEmailPerson: tenancy.agencyEmailPerson,
+        rentDuration: tenancy.propertyDetails.rentDuration,
+        product: tenancy.propertyDetails.product,
+        rentAmount: tenancy.propertyDetails.rentAmount,
+        rentalAddress: fullRentalAddress,
+        rentalPostalCode: rentalPostalCode,
+        rentalCity: rentalCity,
+        randomID,
+      });
+    } else {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/rj1`, {
+        tenantsName: tenancy.tenantDetails.tenantName,
+        tenantsEmail: tenancy.tenantDetails.tenantEmail,
+        tenantsPhone: tenancy.tenantDetails.tenantPhone,
+        agencyName: tenancy.agencyName,
+        agencyContactPerson: tenancy.agencyContactPerson,
+        agencyPhonePerson: tenancy.agencyPhonePerson,
+        agencyEmailPerson: tenancy.agencyEmailPerson,
+        rentDuration: tenancy.propertyDetails.rentDuration,
+        product: tenancy.propertyDetails.product,
+        rentAmount: tenancy.propertyDetails.rentAmount,
+        rentalAddress: fullRentalAddress,
+        rentalPostalCode: rentalPostalCode,
+        rentalCity: rentalCity,
+        randomID,
+      });
+    }
 
     setStep(step + 1);
   };
@@ -229,7 +229,6 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
 
         <div className={style.GroupInput}>
           <div className={style.FormLeft}>
-            <p></p>
             {/* Google maps Autocomplete */}
             <PlacesAutocomplete
               value={fullRentalAddress}
