@@ -3,7 +3,7 @@ import React from "react";
 
 //Material Ui Icons
 import EmailIcon from "@material-ui/icons/Email";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import PhoneIcon from "@material-ui/icons/Phone";
 
 // Images
 import RimboLogoWhite from "../../images/rimbo_logo_white.png";
@@ -30,7 +30,7 @@ const Footer = () => {
           </a>
         </div>
         <div className={styles.FooterContact}>
-          <WhatsAppIcon className={styles.Icon} />
+          <PhoneIcon className={styles.Icon} />
           <h2>623063769</h2>
         </div>
       </div>

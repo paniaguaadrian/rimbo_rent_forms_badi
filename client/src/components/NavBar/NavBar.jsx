@@ -1,6 +1,9 @@
 // React Components
 import React from "react";
 
+// Material-UI
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+
 // Images
 import BadiLogo from "../../images/badi_logo.png";
 import SpanishLogo from "../../images/spanish-language.png";
