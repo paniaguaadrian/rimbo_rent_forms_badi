@@ -53,3 +53,26 @@
     font-size: 22px;
   }
 }
+
+/* for big screens */
+@media screen and (min-width: 2560px) {
+  .whatsapp-icon {
+    margin-top: 13px;
+  }
+
+  .whatsapp_float {
+    position: fixed;
+    transform: translateY(-450px);
+    width: 95px;
+    height: 95px;
+    bottom: -150px;
+    right: 150px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+  }
+}

@@ -8,7 +8,7 @@ const WhatsappBubble = () => {
     <div>
       <a
         href="https://wa.me/+34610060069"
-        class="whatsapp_float"
+        className="whatsapp_float"
         target="_blank"
         rel="noopener noreferrer"
       >
